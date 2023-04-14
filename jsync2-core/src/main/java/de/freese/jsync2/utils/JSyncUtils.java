@@ -225,7 +225,7 @@ public final class JSyncUtils {
     }
 
     /**
-     * Removed leading '//' and the final '/'.
+     * Remove leading '//' and the final '/'.
      */
     public static String normalizePath(final URI uri) {
         // String path = Paths.get(uri).toString();

@@ -56,6 +56,7 @@
 
     <modules>
         <module>jsync2-core</module>
+        <module>jsync2-console</module>
         <module>jsync2-test</module>
     </modules>
 

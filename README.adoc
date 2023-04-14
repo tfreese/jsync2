@@ -1,0 +1,3 @@
+= jSync - A Java rsync clone
+
+Work in progress...

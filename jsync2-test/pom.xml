@@ -42,10 +42,11 @@
         <!-- test scope -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jsync2-core</artifactId>
+            <artifactId>jsync2-console</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
