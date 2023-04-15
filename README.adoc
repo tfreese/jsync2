@@ -1,3 +1,10 @@
 = jSync - A Java rsync clone
 
-Work in progress...
+== Supports
+
+* Delete
+* Dry-Run
+* Follow SymLinks
+* Checksum
+* Remote Sender (Work in progress)
+* Remote Receiver (Work in progress)
