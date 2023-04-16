@@ -12,7 +12,7 @@ public abstract class AbstractClientListener implements ClientListener {
     protected String appendDryRun(final Options options, final String message) {
         String msg = message;
 
-        if (options.isDryRun()) {
+        if (msg != null && options.isDryRun()) {
             msg += " (dry-run)";
         }
 
@@ -23,8 +23,15 @@ public abstract class AbstractClientListener implements ClientListener {
         double percent = JSyncUtils.getPercent(bytesRead, syncItem.getSize());
         String message = null;
 
-        if ((bytesRead == 0) || Double.compare(percent % 10, 0D) == 0) {
-            message = String.format("checksum %s: %s = %6.2f %%", syncItem.getRelativePath(), JSyncUtils.toHumanReadableSize(bytesRead), percent);
+        if ((bytesRead == 0) || (int) percent % 2 == 0) {
+            // @formatter:off
+            message = String.format("checksum %s: %s / %s = %6.2f %%"
+                    , syncItem.getRelativePath()
+                    , JSyncUtils.toHumanReadableSize(bytesRead)
+                    , JSyncUtils.toHumanReadableSize(syncItem.getSize())
+                    , percent
+            );
+            // @formatter:on
         }
 
         return message;
@@ -42,9 +49,18 @@ public abstract class AbstractClientListener implements ClientListener {
         double percent = JSyncUtils.getPercent(bytesTransferred, syncItem.getSize());
         String message = null;
 
-        if ((bytesTransferred == 0) || Double.compare(percent % 10, 0D) == 0) {
-            message = String.format("copy %s: %s = %6.2f %%", syncItem.getRelativePath(), JSyncUtils.toHumanReadableSize(bytesTransferred), percent);
+        if ((bytesTransferred == 0) || (int) percent % 2 == 0) {
+            // @formatter:off
+            message = String.format("copy %s: %s / %s = %6.2f %%"
+                    , syncItem.getRelativePath()
+                    , JSyncUtils.toHumanReadableSize(bytesTransferred)
+                    , JSyncUtils.toHumanReadableSize(syncItem.getSize())
+                    , percent
+            );
+            // @formatter:on
         }
+
+        message = appendDryRun(options, message);
 
         return message;
     }

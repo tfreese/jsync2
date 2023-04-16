@@ -9,10 +9,11 @@ import java.net.URI;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import de.freese.jsync2.JSync;
 import de.freese.jsync2.Options;
 import de.freese.jsync2.client.listener.ClientListener;
 import de.freese.jsync2.client.listener.EmptyClientListener;
-import de.freese.jsync2.console.JSyncConsole;
+import de.freese.jsync2.filter.PathFilterNoOp;
 
 /**
  * @author Thomas Freese
@@ -48,6 +49,6 @@ class TestJSyncClient extends AbstractJSyncIoTest {
     }
 
     private void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) throws Exception {
-        JSyncConsole.syncDirectories(options, senderUri, receiverUri, clientListener);
+        JSync.syncDirectories(options, senderUri, receiverUri, clientListener, PathFilterNoOp.INSTANCE);
     }
 }

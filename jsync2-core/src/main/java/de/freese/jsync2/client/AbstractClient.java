@@ -9,9 +9,6 @@ import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 import java.util.function.Predicate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import de.freese.jsync2.Options;
 import de.freese.jsync2.client.listener.ClientListener;
 import de.freese.jsync2.filesystem.EFileSystem;
@@ -24,13 +21,11 @@ import de.freese.jsync2.model.SyncItem;
 import de.freese.jsync2.model.SyncPair;
 import de.freese.jsync2.model.SyncStatus;
 import de.freese.jsync2.utils.JSyncUtils;
-import de.freese.jsync2.utils.io.ObserverableReadableByteChannel;
 
 /**
  * @author Thomas Freese
  */
 public abstract class AbstractClient implements Client {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final Options options;
 
@@ -118,24 +113,23 @@ public abstract class AbstractClient implements Client {
 
         long sizeOfFile = syncItem.getSize();
 
-        LongConsumer bytesReadConsumer = bytesRead -> {
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug("bytesRead = {}", bytesRead);
-            }
+        //        LongConsumer bytesReadConsumer = bytesRead -> {
+        //            if (getLogger().isDebugEnabled()) {
+        //                getLogger().debug("bytesRead = {}", bytesRead);
+        //            }
+        //        };
+        //        ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
+
+        LongConsumer bytesWrittenConsumer = bytesWritten -> {
+            //            if (getLogger().isDebugEnabled()) {
+            //                getLogger().debug("bytesWritten = {}", bytesWritten);
+            //            }
+
+            clientListener.copyProgress(getOptions(), syncItem, bytesWritten);
         };
 
-        LongConsumer bytesWrittenConsumer = bytesRead -> {
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug("bytesWritten = {}", bytesRead);
-            }
-
-            clientListener.copyProgress(getOptions(), syncItem, bytesRead);
-        };
-
-        try (ReadableByteChannel readableByteChannel = getSender().readFile(getSenderPath(), syncItem.getRelativePath(), sizeOfFile);
-             ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)) {
-
-            getReceiver().writeFile(getReceiverPath(), syncItem.getRelativePath(), sizeOfFile, observerableReadableByteChannel, bytesWrittenConsumer);
+        try (ReadableByteChannel readableByteChannel = getSender().readFile(getSenderPath(), syncItem.getRelativePath(), sizeOfFile)) {
+            getReceiver().writeFile(getReceiverPath(), syncItem.getRelativePath(), sizeOfFile, readableByteChannel, bytesWrittenConsumer);
         }
         catch (Exception ex) {
             clientListener.error(ex.getMessage(), ex);
@@ -144,7 +138,6 @@ public abstract class AbstractClient implements Client {
         }
 
         try {
-            // Datei überprüfen.
             clientListener.validate(getOptions(), syncItem);
             getReceiver().validateFile(getReceiverPath(), syncItem, getOptions().isChecksum(), bytesRead -> clientListener.checksumProgress(getOptions(), syncItem, bytesRead));
         }
@@ -260,10 +253,6 @@ public abstract class AbstractClient implements Client {
             .forEach(pair -> delete(pair.getReceiverItem(), clientListener))
             ;
         // @formatter:on
-    }
-
-    protected Logger getLogger() {
-        return this.logger;
     }
 
     protected Options getOptions() {

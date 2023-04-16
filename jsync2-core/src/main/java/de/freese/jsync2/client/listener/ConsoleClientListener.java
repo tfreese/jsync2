@@ -47,7 +47,11 @@ public class ConsoleClientListener extends AbstractClientListener {
             return;
         }
 
-        getPrintStream().println(message);
+        getPrintStream().print(message + "\r");
+
+        if (bytesRead == syncItem.getSize()) {
+            getPrintStream().println();
+        }
     }
 
     @Override
@@ -62,13 +66,11 @@ public class ConsoleClientListener extends AbstractClientListener {
             return;
         }
 
-        // getPrintStream().printf("\t%s%n", message);
-        getPrintStream().println(message);
+        getPrintStream().print(message + "\r");
 
-        // if (syncItem.getSize() == bytesTransferred)
-        // {
-        // getPrintStream().println();
-        // }
+        if (bytesTransferred == syncItem.getSize()) {
+            getPrintStream().println();
+        }
     }
 
     @Override

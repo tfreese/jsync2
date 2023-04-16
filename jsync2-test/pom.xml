@@ -42,7 +42,7 @@
         <!-- test scope -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jsync2-console</artifactId>
+            <artifactId>jsync2-core</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
@@ -60,6 +60,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

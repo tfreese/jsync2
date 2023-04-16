@@ -2,26 +2,19 @@
 package de.freese.jsync2.console;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.freese.jsync2.JSync;
 import de.freese.jsync2.Options;
-import de.freese.jsync2.client.Client;
-import de.freese.jsync2.client.DefaultClient;
 import de.freese.jsync2.client.listener.ClientListener;
 import de.freese.jsync2.client.listener.ConsoleClientListener;
 import de.freese.jsync2.console.arguments.ArgumentParser;
 import de.freese.jsync2.console.arguments.ArgumentParserApacheCommonsCli;
-import de.freese.jsync2.filesystem.EFileSystem;
 import de.freese.jsync2.filter.PathFilter;
 import de.freese.jsync2.filter.PathFilterEndsWith;
-import de.freese.jsync2.filter.PathFilterNoOp;
-import de.freese.jsync2.model.SyncItem;
-import de.freese.jsync2.model.SyncPair;
 
 /**
  * @author Thomas Freese
@@ -35,6 +28,9 @@ public final class JSyncConsole {
         if (args2.length == 0) {
             String fileSrc = "file://" + System.getProperty("user.dir") + "/jsync2-console";
             String fileDst = "file://" + System.getProperty("java.io.tmpdir") + "/jsync2-console";
+
+            //            String fileSrc = "file:///mnt/mediathek/serien/Dexter/Staffel01";
+            //            String fileDst = "file:///tmp/Dexter/Staffel01";
 
             // @formatter:off
             args2 = new String[]{
@@ -103,38 +99,10 @@ public final class JSyncConsole {
     public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) {
         PathFilter pathFilter = new PathFilterEndsWith(Set.of("target", "build", ".settings", ".idea", ".gradle"), Set.of(".class", ".log"));
 
-        Client client = new DefaultClient(options, senderUri, receiverUri);
-        client.connectFileSystems();
+        JSync.syncDirectories(options, senderUri, receiverUri, clientListener, pathFilter);
+    }
 
-        List<SyncItem> syncItemsSender = new ArrayList<>();
-
-        client.generateSyncItems(EFileSystem.SENDER, pathFilter, syncItem -> {
-            syncItemsSender.add(syncItem);
-
-            String checksum = client.generateChecksum(EFileSystem.SENDER, syncItem, bytesRead -> {
-                // System.out.println("Sender Bytes read: " + i);
-            });
-            syncItem.setChecksum(checksum);
-        });
-
-        List<SyncItem> syncItemsReceiver = new ArrayList<>();
-
-        client.generateSyncItems(EFileSystem.RECEIVER, PathFilterNoOp.INSTANCE, syncItem -> {
-            syncItemsReceiver.add(syncItem);
-
-            String checksum = client.generateChecksum(EFileSystem.RECEIVER, syncItem, bytesRead -> {
-                // System.out.println("Sender Bytes read: " + i);
-            });
-            syncItem.setChecksum(checksum);
-        });
-
-        List<SyncPair> syncPairs = new ArrayList<>();
-        client.mergeSyncItems(syncItemsSender, syncItemsReceiver, syncPairs::add);
-
-        syncPairs.forEach(SyncPair::validateStatus);
-
-        client.syncReceiver(syncPairs, clientListener);
-
-        client.disconnectFileSystems();
+    private JSyncConsole() {
+        super();
     }
 }
