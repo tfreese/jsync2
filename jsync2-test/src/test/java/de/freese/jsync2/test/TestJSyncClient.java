@@ -22,7 +22,7 @@ class TestJSyncClient extends AbstractJSyncIoTest {
     /**
      * @author Thomas Freese
      */
-    private static class TestClientListener extends EmptyClientListener {
+    private static final class TestClientListener extends EmptyClientListener {
         @Override
         public void error(final String message, final Throwable th) {
             assertNull(th);
