@@ -2,6 +2,7 @@
 package de.freese.jsync2.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,7 +14,8 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.freese.jsync2.filter.PathFilter;
@@ -26,11 +28,21 @@ import de.freese.jsync2.model.SyncItem;
  * @author Thomas Freese
  */
 class TestJSyncGenerator extends AbstractJSyncIoTest {
-    @Test
-    @Order(40)
-    void testFileAttributes() throws Exception {
-        System.out.println();
+    private static final Path PATH_DEST = createDestPath(TestJSyncGenerator.class);
+    private static final Path PATH_SOURCE = createSourcePath(TestJSyncGenerator.class);
 
+    @AfterEach
+    void afterEach() throws Exception {
+        deletePaths(PATH_SOURCE, PATH_DEST);
+    }
+
+    @BeforeEach
+    void beforeEach() throws Exception {
+        createSourceStructure(PATH_SOURCE);
+    }
+
+    @Test
+    void testFileAttributes() throws Exception {
         List<SyncItem> list = new ArrayList<>();
         new DefaultGenerator().generateItems(System.getProperty("user.dir"), false, PathFilterNoOp.INSTANCE, list::add);
 
@@ -42,19 +54,14 @@ class TestJSyncGenerator extends AbstractJSyncIoTest {
     }
 
     @Test
-    @Order(30)
     void testFilter() throws Exception {
-        System.out.println();
-
         PathFilter filter = new PathFilterEndsWith(Set.of("src", "target", ".settings"), Set.of(".classpath", ".project"));
         List<SyncItem> list = new ArrayList<>();
         new DefaultGenerator().generateItems(System.getProperty("user.dir"), false, filter, list::add);
 
         Map<String, SyncItem> map = list.stream().collect(Collectors.toMap(SyncItem::getRelativePath, Function.identity()));
 
-        assertTrue(map.size() >= 1);
-
-        map.keySet().stream().sorted().forEach(System.out::println);
+        assertFalse(map.isEmpty());
 
         assertTrue(map.keySet().stream().noneMatch(path -> path.endsWith(".classpath")));
         assertTrue(map.keySet().stream().noneMatch(path -> path.endsWith(".project")));
@@ -64,38 +71,11 @@ class TestJSyncGenerator extends AbstractJSyncIoTest {
     }
 
     @Test
-    @Order(10)
-    void testGeneratorQuelle() throws Exception {
-        System.out.println();
-
-        Path base = PATH_QUELLE;
-        System.out.printf("Quelle: %s%n", base);
-
+    void testGenerator() throws Exception {
         List<SyncItem> syncItems = new ArrayList<>();
-        new DefaultGenerator().generateItems(base.toString(), false, PathFilterNoOp.INSTANCE, syncItems::add);
 
-        System.out.printf("Anzahl SyncItems: %d%n", syncItems.size());
+        new DefaultGenerator().generateItems(PATH_SOURCE.toString(), false, PathFilterNoOp.INSTANCE, syncItems::add);
 
-        assertEquals(4, syncItems.size());
-
-        syncItems.forEach(syncItem -> System.out.printf("%s%n", syncItem));
-    }
-
-    @Test
-    @Order(20)
-    void testGeneratorZiel() throws Exception {
-        System.out.println();
-
-        Path base = PATH_ZIEL;
-        System.out.printf("Ziel: %s%n", base);
-
-        List<SyncItem> syncItems = new ArrayList<>();
-        new DefaultGenerator().generateItems(base.toString(), false, PathFilterNoOp.INSTANCE, syncItems::add);
-
-        System.out.printf("Anzahl SyncItems: %d%n", syncItems.size());
-
-        assertEquals(3, syncItems.size());
-
-        syncItems.forEach(syncItem -> System.out.printf("%s%n", syncItem));
+        assertEquals(7, syncItems.size());
     }
 }

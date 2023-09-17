@@ -1,0 +1,80 @@
+// Execute Task in SubModule: gradle MODUL:clean build
+buildscript {
+    // For Plugins
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        gradlePluginPortal() // maven { url "https://plugins.gradle.org/m2"; name "plugins-gradle" }
+    }
+
+    dependencies {
+        classpath "de.freese.gradle:gradle-plugins:0.0.1-SNAPSHOT"
+        classpath "io.spring.gradle:dependency-management-plugin:$version_springDependencyManagement"
+//        classpath "org.springframework.boot:spring-boot-gradle-plugin:$version_springBootGradlePlugin"
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+    apply plugin: "io.spring.dependency-management"
+    apply plugin: "de.freese.gradle.plugin.conventions"
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:$version_springBoot"
+        }
+
+        dependencies {
+            dependency "commons-cli:commons-cli:$version_commonsCli"
+        }
+    }
+
+//    dependencies {
+//        testImplementation("org.junit.jupiter:junit-jupiter")
+//        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+//    }
+}
+
+project("jsync2-core") {
+    apply plugin: "java-library"
+    description = "A Java rsync clone: Core Module"
+    dependencies {
+        api("org.slf4j:slf4j-api")
+    }
+}
+
+project("jsync2-console") {
+    description = "A Java rsync clone: Console Module"
+    dependencies {
+        implementation(project(":jsync2-core"))
+
+        implementation("commons-cli:commons-cli")
+
+        runtimeOnly("org.slf4j:slf4j-nop")
+    }
+}
+
+project("jsync2-swing") {
+    description = "A Java rsync clone: Swing-GUI"
+    dependencies {
+        implementation(project(":jsync2-core"))
+
+        runtimeOnly("org.slf4j:slf4j-simple")
+    }
+}
+
+project("jsync2-test") {
+    description = "A Java rsync clone: Test Module"
+    dependencies {
+        testImplementation(project(":jsync2-core"))
+
+        testImplementation("org.junit.jupiter:junit-jupiter")
+
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+        testRuntimeOnly("org.slf4j:slf4j-simple")
+    }
+//    test {
+//        maxParallelForks = 1 // Will not do parallel execution
+//    }
+}
