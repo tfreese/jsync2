@@ -5,10 +5,3 @@ include "jsync2-core"
 include "jsync2-console"
 include "jsync2-swing"
 include "jsync2-test"
-
-buildCache {
-    local {
-        //directory = new File(rootDir, 'build-cache')
-        removeUnusedEntriesAfterDays = 7
-    }
-}
