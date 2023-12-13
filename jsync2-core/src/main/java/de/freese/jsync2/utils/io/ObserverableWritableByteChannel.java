@@ -35,7 +35,7 @@ public class ObserverableWritableByteChannel implements WritableByteChannel {
         return this.delegate.isOpen();
     }
 
-    public ObserverableWritableByteChannel onBytesWritten(LongConsumer bytesWrittenConsumer) {
+    public ObserverableWritableByteChannel onBytesWritten(final LongConsumer bytesWrittenConsumer) {
         this.bytesWrittenConsumer = Objects.requireNonNull(bytesWrittenConsumer, "bytesWrittenConsumer required");
 
         return this;

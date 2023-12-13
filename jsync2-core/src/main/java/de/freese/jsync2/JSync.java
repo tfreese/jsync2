@@ -18,8 +18,8 @@ import de.freese.jsync2.model.SyncPair;
  * @author Thomas Freese
  */
 public final class JSync {
-    
-    public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener, PathFilter pathFilter) {
+
+    public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener, final PathFilter pathFilter) {
         Client client = new DefaultClient(options, senderUri, receiverUri);
         client.connectFileSystems();
 

@@ -18,7 +18,7 @@ public class DefaultSyncItem implements SyncItem {
         this(relativePath, false);
     }
 
-    public DefaultSyncItem(final String relativePath, boolean isFile) {
+    public DefaultSyncItem(final String relativePath, final boolean isFile) {
         super();
 
         this.relativePath = Objects.requireNonNull(relativePath, "relativePath required");

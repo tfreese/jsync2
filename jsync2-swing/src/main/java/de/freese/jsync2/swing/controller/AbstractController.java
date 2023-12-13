@@ -17,7 +17,7 @@ public abstract class AbstractController implements Controller {
 
     private final View view;
 
-    protected AbstractController(View view) {
+    protected AbstractController(final View view) {
         super();
 
         this.view = view;

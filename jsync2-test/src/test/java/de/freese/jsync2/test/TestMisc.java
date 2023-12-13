@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
  * @author Thomas Freese
  */
 class TestMisc {
-    public static void main(String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception {
         new TestMisc().testPrintSameLine();
     }
 

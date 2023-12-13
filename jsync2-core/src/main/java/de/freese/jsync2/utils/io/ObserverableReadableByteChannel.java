@@ -38,7 +38,7 @@ public class ObserverableReadableByteChannel implements ReadableByteChannel {
         return this.delegate.isOpen();
     }
 
-    public ObserverableReadableByteChannel onBytesRead(LongConsumer bytesReadConsumer) {
+    public ObserverableReadableByteChannel onBytesRead(final LongConsumer bytesReadConsumer) {
         this.bytesReadConsumer = Objects.requireNonNull(bytesReadConsumer, "bytesReadConsumer required");
 
         return this;

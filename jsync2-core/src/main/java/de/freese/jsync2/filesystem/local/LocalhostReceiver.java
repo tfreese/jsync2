@@ -96,7 +96,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
     }
 
     @Override
-    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel, LongConsumer consumerBytesWritten) {
+    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel, final LongConsumer consumerBytesWritten) {
         Path path = Paths.get(baseDir, relativeFile);
         Path parentPath = path.getParent();
 
