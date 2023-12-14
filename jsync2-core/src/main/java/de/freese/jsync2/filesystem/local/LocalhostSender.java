@@ -20,10 +20,10 @@ import de.freese.jsync2.filesystem.Sender;
 public class LocalhostSender extends AbstractLocalFileSystem implements Sender {
     @Override
     public ReadableByteChannel readFile(final String baseDir, final String relativeFile, final long sizeOfFile) {
-        Path path = Paths.get(baseDir, relativeFile);
+        final Path path = Paths.get(baseDir, relativeFile);
 
         if (!Files.exists(path)) {
-            String message = String.format("file doesn't exist: %s", path);
+            final String message = String.format("file doesn't exist: %s", path);
             getLogger().warn(message);
 
             return null;

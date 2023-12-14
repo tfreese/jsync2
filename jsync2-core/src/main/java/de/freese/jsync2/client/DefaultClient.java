@@ -27,7 +27,7 @@ public class DefaultClient extends AbstractClient {
     @Override
     public void mergeSyncItems(final List<SyncItem> syncItemsSender, final List<SyncItem> syncItemsReceiver, final Consumer<SyncPair> consumer) {
         // Map of ReceiverItems.
-        Map<String, SyncItem> mapReceiver = syncItemsReceiver.stream().collect(Collectors.toMap(SyncItem::getRelativePath, Function.identity()));
+        final Map<String, SyncItem> mapReceiver = syncItemsReceiver.stream().collect(Collectors.toMap(SyncItem::getRelativePath, Function.identity()));
 
         // @formatter:off
         syncItemsSender.stream()
@@ -42,11 +42,11 @@ public class DefaultClient extends AbstractClient {
 
     @Override
     public void syncReceiver(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        ClientListener cl = clientListener != null ? clientListener : new EmptyClientListener();
+        final ClientListener cl = clientListener != null ? clientListener : new EmptyClientListener();
 
         // Filter all items, which are synchronized.
-        Predicate<SyncPair> isSynchronised = p -> SyncStatus.SYNCHRONIZED.equals(p.getStatus());
-        List<SyncPair> sync = syncPairs.stream().filter(isSynchronised.negate()).toList();
+        final Predicate<SyncPair> isSynchronised = p -> SyncStatus.SYNCHRONIZED.equals(p.getStatus());
+        final List<SyncPair> sync = syncPairs.stream().filter(isSynchronised.negate()).toList();
 
         // Delete
         if (getOptions().isDelete()) {

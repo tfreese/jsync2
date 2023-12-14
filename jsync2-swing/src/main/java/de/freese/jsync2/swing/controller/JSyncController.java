@@ -17,7 +17,7 @@ public class JSyncController extends AbstractController {
 
     @Override
     public Component init(final Messages resourceBundle) {
-        Component component = super.init(resourceBundle);
+        final Component component = super.init(resourceBundle);
 
         getView().restoreState();
 

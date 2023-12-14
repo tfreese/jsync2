@@ -12,9 +12,7 @@ import de.freese.jsync2.utils.JSyncUtils;
  */
 public final class JSyncContext {
     private static ExecutorService executorService;
-
     private static JFrame mainFrame;
-
     private static Messages messages;
 
     public static ExecutorService getExecutorService() {

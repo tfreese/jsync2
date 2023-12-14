@@ -31,8 +31,8 @@ public class DefaultSyncView extends AbstractView implements SyncView {
 
     @Override
     public void restoreState() {
-        Path path = Paths.get(System.getProperty("user.home"), ".java-apps", "jsync", "jSyncGuiState");
-        Properties properties = new Properties();
+        final Path path = Paths.get(System.getProperty("user.home"), ".java-apps", "jsync", "jSyncGuiState");
+        final Properties properties = new Properties();
 
         if (Files.exists(path)) {
             try (InputStream is = Files.newInputStream(path, StandardOpenOption.READ)) {
@@ -58,9 +58,9 @@ public class DefaultSyncView extends AbstractView implements SyncView {
 
     @Override
     public void saveState() {
-        Path path = Paths.get(System.getProperty("user.home"), ".java-apps", "jsync", "jSyncGuiState");
+        final Path path = Paths.get(System.getProperty("user.home"), ".java-apps", "jsync", "jSyncGuiState");
 
-        Properties properties = new Properties();
+        final Properties properties = new Properties();
 
         //        properties.setProperty("filter.directories", this.textAreaFilterDirs.getText());
         //        properties.setProperty("filter.files", this.textAreaFilterFiles.getText());

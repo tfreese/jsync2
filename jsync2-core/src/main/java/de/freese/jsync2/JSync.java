@@ -20,28 +20,28 @@ import de.freese.jsync2.model.SyncPair;
 public final class JSync {
 
     public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener, final PathFilter pathFilter) {
-        Client client = new DefaultClient(options, senderUri, receiverUri);
+        final Client client = new DefaultClient(options, senderUri, receiverUri);
         client.connectFileSystems();
 
-        List<SyncItem> syncItemsSender = new ArrayList<>();
+        final List<SyncItem> syncItemsSender = new ArrayList<>();
 
         client.generateSyncItems(EFileSystem.SENDER, pathFilter, syncItem -> {
             syncItemsSender.add(syncItem);
 
-            String checksum = client.generateChecksum(EFileSystem.SENDER, syncItem, bytesRead -> clientListener.checksumProgress(options, syncItem, bytesRead));
+            final String checksum = client.generateChecksum(EFileSystem.SENDER, syncItem, bytesRead -> clientListener.checksumProgress(options, syncItem, bytesRead));
             syncItem.setChecksum(checksum);
         });
 
-        List<SyncItem> syncItemsReceiver = new ArrayList<>();
+        final List<SyncItem> syncItemsReceiver = new ArrayList<>();
 
         client.generateSyncItems(EFileSystem.RECEIVER, PathFilterNoOp.INSTANCE, syncItem -> {
             syncItemsReceiver.add(syncItem);
 
-            String checksum = client.generateChecksum(EFileSystem.RECEIVER, syncItem, bytesRead -> clientListener.checksumProgress(options, syncItem, bytesRead));
+            final String checksum = client.generateChecksum(EFileSystem.RECEIVER, syncItem, bytesRead -> clientListener.checksumProgress(options, syncItem, bytesRead));
             syncItem.setChecksum(checksum);
         });
 
-        List<SyncPair> syncPairs = new ArrayList<>();
+        final List<SyncPair> syncPairs = new ArrayList<>();
         client.mergeSyncItems(syncItemsSender, syncItemsReceiver, syncPairs::add);
 
         syncPairs.forEach(SyncPair::validateStatus);

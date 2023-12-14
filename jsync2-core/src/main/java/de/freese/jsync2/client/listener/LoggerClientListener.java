@@ -14,7 +14,7 @@ public class LoggerClientListener extends AbstractClientListener {
     private final Logger logger = LoggerFactory.getLogger("Client");
 
     public void checksumProgress(final Options options, final SyncItem syncItem, final long bytesRead) {
-        String message = checksumProgressMessage(options, syncItem, bytesRead);
+        final String message = checksumProgressMessage(options, syncItem, bytesRead);
 
         if (message == null) {
             return;
@@ -25,7 +25,7 @@ public class LoggerClientListener extends AbstractClientListener {
 
     @Override
     public void copyProgress(final Options options, final SyncItem syncItem, final long bytesTransferred) {
-        String message = copyProgressMessage(options, syncItem, bytesTransferred);
+        final String message = copyProgressMessage(options, syncItem, bytesTransferred);
 
         if (message == null) {
             return;
@@ -36,7 +36,7 @@ public class LoggerClientListener extends AbstractClientListener {
 
     @Override
     public void delete(final Options options, final SyncItem syncItem) {
-        String message = deleteMessage(options, syncItem);
+        final String message = deleteMessage(options, syncItem);
 
         getLogger().info(message);
     }
@@ -48,14 +48,14 @@ public class LoggerClientListener extends AbstractClientListener {
 
     @Override
     public void update(final Options options, final SyncItem syncItem) {
-        String message = updateMessage(options, syncItem);
+        final String message = updateMessage(options, syncItem);
 
         getLogger().info(message);
     }
 
     @Override
     public void validate(final Options options, final SyncItem syncItem) {
-        String message = validateMessage(options, syncItem);
+        final String message = validateMessage(options, syncItem);
 
         getLogger().info(message);
     }

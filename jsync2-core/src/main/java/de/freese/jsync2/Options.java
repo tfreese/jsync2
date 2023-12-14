@@ -12,16 +12,12 @@ public final class Options {
      * Default: 4 MB
      */
     public static final int BUFFER_SIZE = 1024 * 1024 * 4;
-    
     /**
      * Default: UTF-8
      */
     public static final Charset CHARSET = StandardCharsets.UTF_8;
-
     public static final String EMPTY_STRING = "";
-
     public static final boolean IS_LINUX = System.getProperty("os.name").toLowerCase().startsWith("linux");
-
     public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
 
     /**
@@ -67,13 +63,9 @@ public final class Options {
     }
 
     private boolean checksum;
-
     private boolean delete;
-
     private boolean dryRun = true;
-
     private boolean followSymLinks = true;
-
     private boolean parallel;
 
     private Options() {

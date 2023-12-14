@@ -26,7 +26,7 @@ public final class DigestUtils {
      * {@link ByteBuffer#position(int)}<br>
      */
     public static void digest(final MessageDigest messageDigest, final ByteBuffer byteBuffer) {
-        int position = byteBuffer.position();
+        final int position = byteBuffer.position();
 
         messageDigest.update(byteBuffer);
 
@@ -72,7 +72,7 @@ public final class DigestUtils {
 
     public static String sha256DigestAsHex(final Path path, final LongConsumer consumerBytesRead) {
         try (ReadableByteChannel channel = Files.newByteChannel(path, StandardOpenOption.READ)) {
-            byte[] bytes = sha256Digest(channel, consumerBytesRead);
+            final byte[] bytes = sha256Digest(channel, consumerBytesRead);
 
             return JSyncUtils.bytesToHex(bytes);
         }
@@ -106,13 +106,13 @@ public final class DigestUtils {
      * @param consumerBytesRead {@link LongConsumer}; optional
      */
     private static byte[] sha256Digest(final ReadableByteChannel readableByteChannel, final LongConsumer consumerBytesRead) throws IOException {
-        MessageDigest messageDigest = createSha256Digest();
+        final MessageDigest messageDigest = createSha256Digest();
 
         if (consumerBytesRead != null) {
             consumerBytesRead.accept(0);
         }
 
-        ByteBuffer buffer = ByteBuffer.allocate(Options.BUFFER_SIZE);
+        final ByteBuffer buffer = ByteBuffer.allocate(Options.BUFFER_SIZE);
 
         long bytesRead = 0;
 

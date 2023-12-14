@@ -13,6 +13,7 @@ import java.util.function.LongConsumer;
 public class ObserverableWritableByteChannel implements WritableByteChannel {
     private final boolean closeDelegate;
     private final WritableByteChannel delegate;
+
     private long bytesWritten;
     private LongConsumer bytesWrittenConsumer;
 
@@ -43,7 +44,7 @@ public class ObserverableWritableByteChannel implements WritableByteChannel {
 
     @Override
     public int write(final ByteBuffer src) throws IOException {
-        int writeCount = this.delegate.write(src);
+        final int writeCount = this.delegate.write(src);
 
         if (writeCount > 0) {
             this.bytesWritten += writeCount;

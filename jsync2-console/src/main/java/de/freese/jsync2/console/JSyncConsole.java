@@ -23,17 +23,17 @@ public final class JSyncConsole {
     public static final Logger LOGGER = LoggerFactory.getLogger(JSyncConsole.class);
 
     public static void main(final String[] args) throws Exception {
-        String[] args2 = args;
+        String[] arguments = args;
 
-        if (args2.length == 0) {
-            String fileSrc = "file://" + System.getProperty("user.dir") + "/jsync2-console";
-            String fileDst = "file://" + System.getProperty("java.io.tmpdir") + "/jsync2-console";
+        if (arguments.length == 0) {
+            final String fileSrc = "file://" + System.getProperty("user.dir") + "/jsync2-console";
+            final String fileDst = "file://" + System.getProperty("java.io.tmpdir") + "/jsync2-console";
 
-            //            String fileSrc = "file:///mnt/mediathek/serien/Dexter/Staffel01";
-            //            String fileDst = "file:///tmp/Dexter/Staffel01";
+            // final String fileSrc = "file:///mnt/mediathek/serien/Dexter/Staffel01";
+            // final String fileDst = "file:///tmp/Dexter/Staffel01";
 
             // @formatter:off
-            args2 = new String[]{
+            arguments = new String[]{
                     "--delete",
                     "--follow-symlinks",
                     "--checksum",
@@ -51,8 +51,8 @@ public final class JSyncConsole {
         ArgumentParser argumentParser = null;
 
         try {
-            argumentParser = new ArgumentParserApacheCommonsCli(args2);
-            // argumentParser = new ArgumentParserJopt(args2);
+            argumentParser = new ArgumentParserApacheCommonsCli(arguments);
+            // argumentParser = new ArgumentParserJopt(arguments);
         }
         catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -79,7 +79,7 @@ public final class JSyncConsole {
 
     public static void run(final ArgumentParser argumentParser) throws Exception {
         // @formatter:off
-        Options options = new Options.Builder()
+        final Options options = new Options.Builder()
                 .delete(argumentParser.delete())
                 .followSymLinks(argumentParser.followSymlinks())
                 .dryRun(argumentParser.dryRun())
@@ -88,8 +88,8 @@ public final class JSyncConsole {
                 ;
         // @formatter:on
 
-        URI senderUri = new URI(argumentParser.sender());
-        URI receiverUri = new URI(argumentParser.receiver());
+        final URI senderUri = new URI(argumentParser.sender());
+        final URI receiverUri = new URI(argumentParser.receiver());
 
         System.out.println("Start synchronisation");
         syncDirectories(options, senderUri, receiverUri, new ConsoleClientListener());
@@ -97,7 +97,7 @@ public final class JSyncConsole {
     }
 
     public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) {
-        PathFilter pathFilter = new PathFilterEndsWith(Set.of("target", "build", ".settings", ".idea", ".gradle"), Set.of(".class", ".log"));
+        final PathFilter pathFilter = new PathFilterEndsWith(Set.of("target", "build", ".settings", ".idea", ".gradle"), Set.of(".class", ".log"));
 
         JSync.syncDirectories(options, senderUri, receiverUri, clientListener, pathFilter);
     }

@@ -28,17 +28,11 @@ import de.freese.jsync2.utils.JSyncUtils;
 public abstract class AbstractClient implements Client {
 
     private final Options options;
-
     private final Receiver receiver;
-
     private final String receiverPath;
-
     private final URI receiverUri;
-
     private final Sender sender;
-
     private final String senderPath;
-
     private final URI senderUri;
 
     protected AbstractClient(final Options options, final URI senderUri, final URI receiverUri) {
@@ -71,8 +65,8 @@ public abstract class AbstractClient implements Client {
             return null;
         }
 
-        FileSystem fs = null;
-        String baseDir = null;
+        final FileSystem fs;
+        final String baseDir;
 
         if (EFileSystem.SENDER.equals(fileSystem)) {
             fs = getSender();
@@ -88,8 +82,8 @@ public abstract class AbstractClient implements Client {
 
     @Override
     public void generateSyncItems(final EFileSystem fileSystem, final PathFilter pathFilter, final Consumer<SyncItem> consumer) {
-        FileSystem fs = null;
-        String baseDir = null;
+        final FileSystem fs;
+        final String baseDir;
 
         if (EFileSystem.SENDER.equals(fileSystem)) {
             fs = getSender();
@@ -111,16 +105,16 @@ public abstract class AbstractClient implements Client {
             return;
         }
 
-        long sizeOfFile = syncItem.getSize();
+        final long sizeOfFile = syncItem.getSize();
 
-        //        LongConsumer bytesReadConsumer = bytesRead -> {
+        //        final LongConsumer bytesReadConsumer = bytesRead -> {
         //            if (getLogger().isDebugEnabled()) {
         //                getLogger().debug("bytesRead = {}", bytesRead);
         //            }
         //        };
-        //        ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
+        //        final ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
 
-        LongConsumer bytesWrittenConsumer = bytesWritten -> {
+        final LongConsumer bytesWrittenConsumer = bytesWritten -> {
             //            if (getLogger().isDebugEnabled()) {
             //                getLogger().debug("bytesWritten = {}", bytesWritten);
             //            }
@@ -147,15 +141,15 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void copyFiles(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
-        Predicate<SyncPair> isFile = p -> p.getSenderItem().isFile();
-        Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
-        Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
-        Predicate<SyncPair> isDifferentSize = p -> SyncStatus.DIFFERENT_SIZE.equals(p.getStatus());
-        Predicate<SyncPair> isDifferentChecksum = p -> SyncStatus.DIFFERENT_CHECKSUM.equals(p.getStatus());
+        final Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
+        final Predicate<SyncPair> isFile = p -> p.getSenderItem().isFile();
+        final Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
+        final Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
+        final Predicate<SyncPair> isDifferentSize = p -> SyncStatus.DIFFERENT_SIZE.equals(p.getStatus());
+        final Predicate<SyncPair> isDifferentChecksum = p -> SyncStatus.DIFFERENT_CHECKSUM.equals(p.getStatus());
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isFile)
                 .and(isOnlyInSource
                         .or(isDifferentTimestamp)
@@ -172,13 +166,13 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void createDirectories(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
-        Predicate<SyncPair> isDirectory = p -> p.getSenderItem().isDirectory();
-        Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
-        Predicate<SyncPair> isEmpty = p -> p.getSenderItem().getSize() == 0;
+        final Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
+        final Predicate<SyncPair> isDirectory = p -> p.getSenderItem().isDirectory();
+        final Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
+        final Predicate<SyncPair> isEmpty = p -> p.getSenderItem().getSize() == 0;
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isDirectory)
                 .and(isOnlyInTarget)
                 .and(isEmpty)
@@ -220,12 +214,12 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void deleteDirectories(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getReceiverItem() != null;
-        Predicate<SyncPair> isDirectory = p -> p.getReceiverItem().isDirectory();
-        Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_TARGET.equals(p.getStatus());
+        final Predicate<SyncPair> isExisting = p -> p.getReceiverItem() != null;
+        final Predicate<SyncPair> isDirectory = p -> p.getReceiverItem().isDirectory();
+        final Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_TARGET.equals(p.getStatus());
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isDirectory)
                 .and(isOnlyInTarget)
                 ;
@@ -238,12 +232,12 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void deleteFiles(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getReceiverItem() != null;
-        Predicate<SyncPair> isFile = p -> p.getReceiverItem().isFile();
-        Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_TARGET.equals(p.getStatus());
+        final Predicate<SyncPair> isExisting = p -> p.getReceiverItem() != null;
+        final Predicate<SyncPair> isFile = p -> p.getReceiverItem().isFile();
+        final Predicate<SyncPair> isOnlyInTarget = p -> SyncStatus.ONLY_IN_TARGET.equals(p.getStatus());
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isFile)
                 .and(isOnlyInTarget)
                 ;
@@ -299,13 +293,13 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void updateDirectories(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
-        Predicate<SyncPair> isDirectory = p -> p.getSenderItem().isDirectory();
-        Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
-        Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
+        final Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
+        final Predicate<SyncPair> isDirectory = p -> p.getSenderItem().isDirectory();
+        final Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
+        final Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isDirectory)
                 .and(isOnlyInSource
                         .or(isDifferentTimestamp)
@@ -320,13 +314,13 @@ public abstract class AbstractClient implements Client {
     }
 
     protected void updateFiles(final List<SyncPair> syncPairs, final ClientListener clientListener) {
-        Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
-        Predicate<SyncPair> isFile = p -> p.getSenderItem().isFile();
-        Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
-        Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
+        final Predicate<SyncPair> isExisting = p -> p.getSenderItem() != null;
+        final Predicate<SyncPair> isFile = p -> p.getSenderItem().isFile();
+        final Predicate<SyncPair> isOnlyInSource = p -> SyncStatus.ONLY_IN_SOURCE.equals(p.getStatus());
+        final Predicate<SyncPair> isDifferentTimestamp = p -> SyncStatus.DIFFERENT_LAST_MODIFIED_TIME.equals(p.getStatus());
 
         // @formatter:off
-        Predicate<SyncPair> filter = isExisting
+        final Predicate<SyncPair> filter = isExisting
                 .and(isFile)
                 .and(isOnlyInSource
                         .or(isDifferentTimestamp)

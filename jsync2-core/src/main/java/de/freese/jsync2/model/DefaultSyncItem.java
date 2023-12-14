@@ -67,7 +67,7 @@ public class DefaultSyncItem implements SyncItem {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append("SyncItem [");
         sb.append("relativePath=").append(getRelativePath());
 

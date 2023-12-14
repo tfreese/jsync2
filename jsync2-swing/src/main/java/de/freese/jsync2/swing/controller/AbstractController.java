@@ -14,7 +14,6 @@ import de.freese.jsync2.swing.view.View;
  */
 public abstract class AbstractController implements Controller {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
     private final View view;
 
     protected AbstractController(final View view) {

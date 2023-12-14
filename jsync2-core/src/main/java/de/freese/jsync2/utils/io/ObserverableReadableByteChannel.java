@@ -12,11 +12,9 @@ import java.util.function.LongConsumer;
  */
 public class ObserverableReadableByteChannel implements ReadableByteChannel {
     private final boolean closeDelegate;
-
     private final ReadableByteChannel delegate;
 
     private long bytesRead;
-
     private LongConsumer bytesReadConsumer;
 
     public ObserverableReadableByteChannel(final ReadableByteChannel delegate, final boolean closeDelegate) {
@@ -46,7 +44,7 @@ public class ObserverableReadableByteChannel implements ReadableByteChannel {
 
     @Override
     public int read(final ByteBuffer dst) throws IOException {
-        int readCount = this.delegate.read(dst);
+        final int readCount = this.delegate.read(dst);
 
         if (readCount > 0) {
             this.bytesRead += readCount;

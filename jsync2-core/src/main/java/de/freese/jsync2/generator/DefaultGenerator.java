@@ -29,19 +29,19 @@ public class DefaultGenerator implements Generator {
 
     @Override
     public String generateChecksum(final String baseDir, final String relativeFile, final LongConsumer consumerChecksumBytesRead) {
-        Path path = Paths.get(baseDir, relativeFile);
+        final Path path = Paths.get(baseDir, relativeFile);
 
         return DigestUtils.sha256DigestAsHex(path, consumerChecksumBytesRead);
     }
 
     @Override
     public void generateItems(final String baseDir, final boolean followSymLinks, final PathFilter pathFilter, final Consumer<SyncItem> consumer) {
-        Path basePath = Paths.get(baseDir);
+        final Path basePath = Paths.get(baseDir);
 
-        FileVisitOption[] visitOptions = JSyncUtils.getFileVisitOptions(followSymLinks);
-        LinkOption[] linkOptions = JSyncUtils.getLinkOptions(followSymLinks);
+        final FileVisitOption[] visitOptions = JSyncUtils.getFileVisitOptions(followSymLinks);
+        final LinkOption[] linkOptions = JSyncUtils.getLinkOptions(followSymLinks);
 
-        Consumer<Path> pathConsumer = path -> {
+        final Consumer<Path> pathConsumer = path -> {
             final SyncItem syncItem;
 
             if (Files.isDirectory(path)) {
@@ -71,12 +71,12 @@ public class DefaultGenerator implements Generator {
             return null;
         }
 
-        SyncItem syncItem = new DefaultSyncItem(relativeDir);
+        final SyncItem syncItem = new DefaultSyncItem(relativeDir);
 
         try {
             try (Stream<Path> children = Files.list(directory)) {
                 // @formatter:off
-                long count = children
+                final long count = children
                         .filter(child -> !child.equals(directory)) // We do not want the Base-Directory.
                         .count()
                         ;
@@ -85,7 +85,7 @@ public class DefaultGenerator implements Generator {
                 syncItem.setSize(count);
             }
 
-            long lastModifiedTime = Files.getLastModifiedTime(directory, linkOptions).to(TimeUnit.SECONDS);
+            final long lastModifiedTime = Files.getLastModifiedTime(directory, linkOptions).to(TimeUnit.SECONDS);
             syncItem.setLastModifiedTime(lastModifiedTime);
         }
         catch (IOException ex) {
@@ -99,10 +99,10 @@ public class DefaultGenerator implements Generator {
      * @param linkOptions {@link LinkOption}; if LinkOption#NOFOLLOW_LINKS null than Follow
      */
     protected SyncItem toFileItem(final Path file, final String relativeFile, final LinkOption[] linkOptions) {
-        SyncItem syncItem = new DefaultSyncItem(relativeFile, true);
+        final SyncItem syncItem = new DefaultSyncItem(relativeFile, true);
 
         try {
-            BasicFileAttributes basicFileAttributes = Files.readAttributes(file, BasicFileAttributes.class, linkOptions);
+            final BasicFileAttributes basicFileAttributes = Files.readAttributes(file, BasicFileAttributes.class, linkOptions);
             syncItem.setLastModifiedTime(basicFileAttributes.lastModifiedTime().to(TimeUnit.SECONDS));
             syncItem.setSize(basicFileAttributes.size());
         }

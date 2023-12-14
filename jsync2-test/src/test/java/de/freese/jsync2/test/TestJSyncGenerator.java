@@ -43,10 +43,10 @@ class TestJSyncGenerator extends AbstractJSyncIoTest {
 
     @Test
     void testFileAttributes() throws Exception {
-        List<SyncItem> list = new ArrayList<>();
+        final List<SyncItem> list = new ArrayList<>();
         new DefaultGenerator().generateItems(System.getProperty("user.dir"), false, PathFilterNoOp.INSTANCE, list::add);
 
-        SyncItem syncItem = list.stream().filter(si -> si.getRelativePath().endsWith("pom.xml")).findFirst().get();
+        final SyncItem syncItem = list.stream().filter(si -> si.getRelativePath().endsWith("pom.xml")).findFirst().get();
 
         assertNotNull(syncItem);
         assertTrue(syncItem.getLastModifiedTime() > 0);
@@ -55,11 +55,11 @@ class TestJSyncGenerator extends AbstractJSyncIoTest {
 
     @Test
     void testFilter() throws Exception {
-        PathFilter filter = new PathFilterEndsWith(Set.of("src", "target", ".settings"), Set.of(".classpath", ".project"));
-        List<SyncItem> list = new ArrayList<>();
+        final PathFilter filter = new PathFilterEndsWith(Set.of("src", "target", ".settings"), Set.of(".classpath", ".project"));
+        final List<SyncItem> list = new ArrayList<>();
         new DefaultGenerator().generateItems(System.getProperty("user.dir"), false, filter, list::add);
 
-        Map<String, SyncItem> map = list.stream().collect(Collectors.toMap(SyncItem::getRelativePath, Function.identity()));
+        final Map<String, SyncItem> map = list.stream().collect(Collectors.toMap(SyncItem::getRelativePath, Function.identity()));
 
         assertFalse(map.isEmpty());
 
@@ -72,7 +72,7 @@ class TestJSyncGenerator extends AbstractJSyncIoTest {
 
     @Test
     void testGenerator() throws Exception {
-        List<SyncItem> syncItems = new ArrayList<>();
+        final List<SyncItem> syncItems = new ArrayList<>();
 
         new DefaultGenerator().generateItems(PATH_SOURCE.toString(), false, PathFilterNoOp.INSTANCE, syncItems::add);
 

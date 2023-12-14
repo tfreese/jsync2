@@ -54,8 +54,8 @@ class TestJSyncClient extends AbstractJSyncIoTest {
 
     @Test
     void testLocalToLocal() throws Exception {
-        URI senderUri = PATH_SOURCE.toUri();
-        URI receiverUri = PATH_DEST.toUri();
+        final URI senderUri = PATH_SOURCE.toUri();
+        final URI receiverUri = PATH_DEST.toUri();
 
         syncDirectories(options, senderUri, receiverUri, new TestClientListener());
 

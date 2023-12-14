@@ -20,7 +20,7 @@ public abstract class AbstractClientListener implements ClientListener {
     }
 
     protected String checksumProgressMessage(final Options options, final SyncItem syncItem, final long bytesRead) {
-        double percent = JSyncUtils.getPercent(bytesRead, syncItem.getSize());
+        final double percent = JSyncUtils.getPercent(bytesRead, syncItem.getSize());
         String message = null;
 
         if ((bytesRead == 0) || (int) percent % 2 == 0) {
@@ -46,7 +46,7 @@ public abstract class AbstractClientListener implements ClientListener {
     }
 
     protected String copyProgressMessage(final Options options, final SyncItem syncItem, final long bytesTransferred) {
-        double percent = JSyncUtils.getPercent(bytesTransferred, syncItem.getSize());
+        final double percent = JSyncUtils.getPercent(bytesTransferred, syncItem.getSize());
         String message = null;
 
         if ((bytesTransferred == 0) || (int) percent % 2 == 0) {

@@ -52,7 +52,7 @@ public final class JSyncSwing {
     void initGui(final Consumer<JFrame> consumer) throws Exception {
         initUIDefaults();
 
-        JFrame frame = new JFrame();
+        final JFrame frame = new JFrame();
         frame.setTitle(JSyncContext.getMessages().getString("title"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new MainFrameListener());
@@ -61,7 +61,7 @@ public final class JSyncSwing {
         this.controller = new JSyncController();
         this.controller.init(JSyncContext.getMessages());
 
-        JLabel label = new JLabel("jSync Swing GUI", SwingConstants.CENTER);
+        final JLabel label = new JLabel("jSync Swing GUI", SwingConstants.CENTER);
         frame.add(label, BorderLayout.CENTER);
         //        frame.add(syncView.getComponent(), BorderLayout.CENTER);
 
@@ -82,14 +82,14 @@ public final class JSyncSwing {
 
         UIManager.put("FileChooser.useSystemIcons", Boolean.TRUE);
 
-        Color color = new Color(215, 215, 215);
+        final Color color = new Color(215, 215, 215);
         // UIManager.put("Table.alternatingBackground", color);
         UIManager.put("Table.alternateRowColor", color);
         // UIManager.put("List.alternatingBackground", color);
         // defaults.put("Tree.alternatingBackground", color);
 
         // Fonts: Dialog, Monospaced, Arial, DejaVu Sans
-        Font font = new Font("DejaVu Sans", Font.PLAIN, 16);
+        final Font font = new Font("DejaVu Sans", Font.PLAIN, 16);
 
         UIManager.getLookAndFeelDefaults().forEach((key, value) -> {
             if (value instanceof FontUIResource) {
