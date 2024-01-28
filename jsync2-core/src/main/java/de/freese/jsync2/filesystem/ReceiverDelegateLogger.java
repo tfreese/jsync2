@@ -91,7 +91,8 @@ public class ReceiverDelegateLogger implements Receiver {
     }
 
     @Override
-    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel, final LongConsumer consumerBytesRead) {
+    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel,
+                          final LongConsumer consumerBytesRead) {
         getLogger().info("write file: {}/{}, sizeOfFile={}", baseDir, relativeFile, sizeOfFile);
 
         this.delegate.writeFile(baseDir, relativeFile, sizeOfFile, readableByteChannel, consumerBytesRead);

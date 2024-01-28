@@ -25,6 +25,8 @@ class TestJSyncClient extends AbstractJSyncIoTest {
     private static final Path PATH_DEST = createDestPath(TestJSyncClient.class);
     private static final Path PATH_SOURCE = createSourcePath(TestJSyncClient.class);
 
+    private static Options options;
+
     /**
      * @author Thomas Freese
      */
@@ -34,8 +36,6 @@ class TestJSyncClient extends AbstractJSyncIoTest {
             assertNull(th);
         }
     }
-
-    private static Options options;
 
     @BeforeAll
     static void beforeAll() throws Exception {

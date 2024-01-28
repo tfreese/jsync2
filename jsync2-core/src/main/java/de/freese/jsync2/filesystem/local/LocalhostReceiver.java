@@ -96,7 +96,8 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
     }
 
     @Override
-    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel, final LongConsumer consumerBytesWritten) {
+    public void writeFile(final String baseDir, final String relativeFile, final long sizeOfFile, final ReadableByteChannel readableByteChannel,
+                          final LongConsumer consumerBytesWritten) {
         final Path path = Paths.get(baseDir, relativeFile);
         final Path parentPath = path.getParent();
 
@@ -111,7 +112,8 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
 
             final ByteBuffer buffer = ByteBuffer.allocate(Options.BUFFER_SIZE);
 
-            try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.SYNC);
+            try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.SYNC);
                  WritableByteChannel writableByteChannel = new ObserverableWritableByteChannel(fileChannel, true).onBytesWritten(consumerBytesWritten)) {
 
                 //                fileChannel.transferFrom(readableByteChannel, 0, sizeOfFile);
