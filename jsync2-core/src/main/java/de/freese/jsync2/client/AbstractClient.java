@@ -107,12 +107,12 @@ public abstract class AbstractClient implements Client {
 
         final long sizeOfFile = syncItem.getSize();
 
-        //        final LongConsumer bytesReadConsumer = bytesRead -> {
-        //            if (getLogger().isDebugEnabled()) {
-        //                getLogger().debug("bytesRead = {}", bytesRead);
-        //            }
-        //        };
-        //        final ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
+        // final LongConsumer bytesReadConsumer = bytesRead -> {
+        //     if (getLogger().isDebugEnabled()) {
+        //         getLogger().debug("bytesRead = {}", bytesRead);
+        //     }
+        // };
+        // final ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
 
         final LongConsumer bytesWrittenConsumer = bytesWritten -> {
             //            if (getLogger().isDebugEnabled()) {
