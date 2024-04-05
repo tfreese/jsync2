@@ -65,7 +65,7 @@ public final class JSyncUtils {
      * A {@link SocketChannel} will <strong>NOT</strong> be closed !
      */
     public static void close(final Channel channel) {
-        if ((channel != null) && channel.isOpen()) {
+        if (channel != null && channel.isOpen()) {
             try {
                 if (channel instanceof FileChannel fc) {
                     fc.force(false);
@@ -84,7 +84,7 @@ public final class JSyncUtils {
      */
     public static void closeSilently(final Closeable closeable) {
         try {
-            if ((closeable != null) && !(closeable instanceof SocketChannel)) {
+            if (closeable != null && !(closeable instanceof SocketChannel)) {
                 closeable.close();
             }
         }
@@ -145,7 +145,7 @@ public final class JSyncUtils {
      * @return double 0.0 - 1.0
      */
     public static double getProgress(final long value, final long max) {
-        if ((value <= 0L) || (value > max)) {
+        if (value <= 0L || value > max) {
             // throw new IllegalArgumentException("invalid value: " + value);
             return 0.0D;
         }
@@ -323,7 +323,7 @@ public final class JSyncUtils {
      * Split by ';' or ',' to build a Set for the {@link PathFilter}.
      */
     public static Set<String> toFilter(final String value) {
-        if ((value == null) || value.isBlank()) {
+        if (value == null || value.isBlank()) {
             return Collections.emptySet();
         }
 

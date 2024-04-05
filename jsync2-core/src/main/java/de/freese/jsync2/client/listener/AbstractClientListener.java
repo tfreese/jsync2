@@ -23,15 +23,12 @@ public abstract class AbstractClientListener implements ClientListener {
         final double percent = JSyncUtils.getPercent(bytesRead, syncItem.getSize());
         String message = null;
 
-        if ((bytesRead == 0) || (int) percent % 2 == 0) {
-            // @formatter:off
-            message = String.format("checksum %s: %s / %s = %6.2f %%"
-                    , syncItem.getRelativePath()
-                    , JSyncUtils.toHumanReadableSize(bytesRead)
-                    , JSyncUtils.toHumanReadableSize(syncItem.getSize())
-                    , percent
-            );
-            // @formatter:on
+        if (bytesRead == 0 || (int) percent % 2 == 0) {
+            message = String.format("checksum %s: %s / %s = %6.2f %%",
+                    syncItem.getRelativePath(),
+                    JSyncUtils.toHumanReadableSize(bytesRead),
+                    JSyncUtils.toHumanReadableSize(syncItem.getSize()),
+                    percent);
         }
 
         return message;
@@ -49,15 +46,12 @@ public abstract class AbstractClientListener implements ClientListener {
         final double percent = JSyncUtils.getPercent(bytesTransferred, syncItem.getSize());
         String message = null;
 
-        if ((bytesTransferred == 0) || (int) percent % 2 == 0) {
-            // @formatter:off
-            message = String.format("copy %s: %s / %s = %6.2f %%"
-                    , syncItem.getRelativePath()
-                    , JSyncUtils.toHumanReadableSize(bytesTransferred)
-                    , JSyncUtils.toHumanReadableSize(syncItem.getSize())
-                    , percent
-            );
-            // @formatter:on
+        if (bytesTransferred == 0 || (int) percent % 2 == 0) {
+            message = String.format("copy %s: %s / %s = %6.2f %%",
+                    syncItem.getRelativePath(),
+                    JSyncUtils.toHumanReadableSize(bytesTransferred),
+                    JSyncUtils.toHumanReadableSize(syncItem.getSize()),
+                    percent);
         }
 
         message = appendDryRun(options, message);

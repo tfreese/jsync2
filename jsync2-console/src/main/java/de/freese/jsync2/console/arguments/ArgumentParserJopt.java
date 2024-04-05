@@ -1,4 +1,5 @@
-package de.freese.jsync2.console.arguments;/// **
+package de.freese.jsync2.console.arguments;
+/// **
 // * Created: 14.03.2020
 // */
 //
