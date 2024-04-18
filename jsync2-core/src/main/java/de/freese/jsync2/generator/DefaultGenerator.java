@@ -75,12 +75,9 @@ public class DefaultGenerator implements Generator {
 
         try {
             try (Stream<Path> children = Files.list(directory)) {
-                // @formatter:off
                 final long count = children
                         .filter(child -> !child.equals(directory)) // We do not want the Base-Directory.
-                        .count()
-                        ;
-                // @formatter:on
+                        .count();
 
                 syncItem.setSize(count);
             }

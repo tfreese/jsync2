@@ -32,7 +32,6 @@ public final class JSyncConsole {
             // final String fileSrc = "file:///mnt/mediathek/serien/Dexter/Staffel01";
             // final String fileDst = "file:///tmp/Dexter/Staffel01";
 
-            // @formatter:off
             arguments = new String[]{
                     "--delete",
                     "--follow-symlinks",
@@ -45,7 +44,6 @@ public final class JSyncConsole {
                     //"jsync://localhost:8002/tmp/jsync/target"
                     fileDst
             };
-            // @formatter:on
         }
 
         ArgumentParser argumentParser = null;
@@ -67,8 +65,7 @@ public final class JSyncConsole {
         run(argumentParser);
     }
 
-    // private static void disableLogging()
-    // {
+    // private static void disableLogging() {
     // // ch.qos.logback.classic.Logger Logger rootLogger = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
     // // rootLogger.setLevel(Level.OFF);
     // //
@@ -78,15 +75,12 @@ public final class JSyncConsole {
     // }
 
     public static void run(final ArgumentParser argumentParser) throws Exception {
-        // @formatter:off
         final Options options = new Options.Builder()
                 .delete(argumentParser.delete())
                 .followSymLinks(argumentParser.followSymlinks())
                 .dryRun(argumentParser.dryRun())
                 .checksum(argumentParser.checksum())
-                .build()
-                ;
-        // @formatter:on
+                .build();
 
         final URI senderUri = new URI(argumentParser.sender());
         final URI receiverUri = new URI(argumentParser.receiver());
