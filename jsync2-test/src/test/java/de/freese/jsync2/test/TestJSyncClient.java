@@ -38,7 +38,7 @@ class TestJSyncClient extends AbstractJSyncIoTest {
     }
 
     @BeforeAll
-    static void beforeAll() throws Exception {
+    static void beforeAll() {
         options = new Options.Builder().delete(true).checksum(true).followSymLinks(false).dryRun(false).build();
     }
 
@@ -62,7 +62,7 @@ class TestJSyncClient extends AbstractJSyncIoTest {
         assertTrue(true);
     }
 
-    private void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) throws Exception {
+    private void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) {
         JSync.syncDirectories(options, senderUri, receiverUri, clientListener, PathFilterNoOp.INSTANCE);
     }
 }

@@ -1,0 +1,11 @@
+plugins {
+    id "java"
+}
+
+description = "A Java rsync clone: Swing-GUI"
+
+dependencies {
+    implementation(project(":jsync2-core"))
+
+    runtimeOnly("org.slf4j:slf4j-simple")
+}
