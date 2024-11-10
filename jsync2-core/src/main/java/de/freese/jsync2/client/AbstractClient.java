@@ -36,6 +36,8 @@ public abstract class AbstractClient implements Client {
     private final URI senderUri;
 
     protected AbstractClient(final Options options, final URI senderUri, final URI receiverUri) {
+        super();
+
         this.options = Objects.requireNonNull(options, "options required");
         this.senderUri = Objects.requireNonNull(senderUri, "senderUri required");
         this.receiverUri = Objects.requireNonNull(receiverUri, "receiverUri required");

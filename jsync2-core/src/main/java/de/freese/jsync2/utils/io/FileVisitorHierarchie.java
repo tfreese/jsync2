@@ -32,7 +32,7 @@ public class FileVisitorHierarchie implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult postVisitDirectory(final Path dir, final IOException ex) throws IOException {
+    public FileVisitResult postVisitDirectory(final Path dir, final IOException ex) {
         Objects.requireNonNull(dir);
 
         if (ex != null) {
@@ -47,7 +47,7 @@ public class FileVisitorHierarchie implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) {
         Objects.requireNonNull(dir);
         Objects.requireNonNull(attrs);
 
@@ -61,7 +61,7 @@ public class FileVisitorHierarchie implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) {
         Objects.requireNonNull(file);
         Objects.requireNonNull(attrs);
 
@@ -76,7 +76,7 @@ public class FileVisitorHierarchie implements FileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFileFailed(final Path file, final IOException ex) throws IOException {
+    public FileVisitResult visitFileFailed(final Path file, final IOException ex) {
         Objects.requireNonNull(file);
 
         if (ex != null) {

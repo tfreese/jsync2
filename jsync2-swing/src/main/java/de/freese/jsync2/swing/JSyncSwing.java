@@ -49,7 +49,7 @@ public final class JSyncSwing {
         super();
     }
 
-    void initGui(final Consumer<JFrame> consumer) throws Exception {
+    void initGui(final Consumer<JFrame> consumer) {
         initUIDefaults();
 
         final JFrame frame = new JFrame();

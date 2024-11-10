@@ -1,5 +1,5 @@
 package de.freese.jsync2.console.arguments;
-/// **
+// / **
 // * Created: 14.03.2020
 // */
 //
@@ -13,7 +13,7 @@ package de.freese.jsync2.console.arguments;
 // import joptsimple.OptionSet;
 // import joptsimple.OptionSpec;
 //
-/// **
+// / **
 // * Die Parser-Klassen liegen auch intern im JDK-Package jdk.internal.joptsimple.
 // *
 // * @author Thomas Freese

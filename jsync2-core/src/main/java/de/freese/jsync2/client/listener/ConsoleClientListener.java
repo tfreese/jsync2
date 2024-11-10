@@ -20,12 +20,10 @@ public class ConsoleClientListener extends AbstractClientListener {
 
         // final Console console = System.console();
         //
-        // if (console != null)
-        // {
+        // if (console != null) {
         // this.printStream = console.writer();
         // }
-        // else
-        // {
+        // else {
         // this.printStream = System.out;
         // }
 
