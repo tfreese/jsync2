@@ -7,6 +7,7 @@ description = "A Java rsync clone: Test Module"
 dependencies {
     testImplementation(project(":jsync2-core"))
 
+    testImplementation("org.awaitility:awaitility")
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

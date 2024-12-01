@@ -20,7 +20,7 @@ import de.freese.jsync2.filesystem.Receiver;
 import de.freese.jsync2.model.SyncItem;
 import de.freese.jsync2.utils.DigestUtils;
 import de.freese.jsync2.utils.JSyncUtils;
-import de.freese.jsync2.utils.io.ObserverableWritableByteChannel;
+import de.freese.jsync2.utils.io.ObservableWritableByteChannel;
 
 /**
  * {@link Receiver} for Localhost-Filesystems.
@@ -114,7 +114,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
 
             try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING,
                     StandardOpenOption.SYNC);
-                 WritableByteChannel writableByteChannel = new ObserverableWritableByteChannel(fileChannel, true).onBytesWritten(consumerBytesWritten)) {
+                 WritableByteChannel writableByteChannel = new ObservableWritableByteChannel(fileChannel, true).onBytesWritten(consumerBytesWritten)) {
 
                 //                fileChannel.transferFrom(readableByteChannel, 0, sizeOfFile);
                 while (readableByteChannel.read(buffer) != -1) {

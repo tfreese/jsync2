@@ -10,14 +10,14 @@ import java.util.function.LongConsumer;
 /**
  * @author Thomas Freese
  */
-public class ObserverableReadableByteChannel implements ReadableByteChannel {
+public class ObservableReadableByteChannel implements ReadableByteChannel {
     private final boolean closeDelegate;
     private final ReadableByteChannel delegate;
 
     private long bytesRead;
     private LongConsumer bytesReadConsumer;
 
-    public ObserverableReadableByteChannel(final ReadableByteChannel delegate, final boolean closeDelegate) {
+    public ObservableReadableByteChannel(final ReadableByteChannel delegate, final boolean closeDelegate) {
         super();
 
         this.delegate = Objects.requireNonNull(delegate, "delegate required");
@@ -36,7 +36,7 @@ public class ObserverableReadableByteChannel implements ReadableByteChannel {
         return this.delegate.isOpen();
     }
 
-    public ObserverableReadableByteChannel onBytesRead(final LongConsumer bytesReadConsumer) {
+    public ObservableReadableByteChannel onBytesRead(final LongConsumer bytesReadConsumer) {
         this.bytesReadConsumer = Objects.requireNonNull(bytesReadConsumer, "bytesReadConsumer required");
 
         return this;

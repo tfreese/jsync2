@@ -116,13 +116,12 @@ public abstract class AbstractClient implements Client {
         // };
         // final ObserverableReadableByteChannel observerableReadableByteChannel = new ObserverableReadableByteChannel(readableByteChannel, true).onBytesRead(bytesReadConsumer)
 
-        final LongConsumer bytesWrittenConsumer = bytesWritten -> {
-            //            if (getLogger().isDebugEnabled()) {
-            //                getLogger().debug("bytesWritten = {}", bytesWritten);
-            //            }
+        final LongConsumer bytesWrittenConsumer = bytesWritten ->
+                //            if (getLogger().isDebugEnabled()) {
+                //                getLogger().debug("bytesWritten = {}", bytesWritten);
+                //            }
 
-            clientListener.copyProgress(getOptions(), syncItem, bytesWritten);
-        };
+                clientListener.copyProgress(getOptions(), syncItem, bytesWritten);
 
         try (ReadableByteChannel readableByteChannel = getSender().readFile(getSenderPath(), syncItem.getRelativePath(), sizeOfFile)) {
             getReceiver().writeFile(getReceiverPath(), syncItem.getRelativePath(), sizeOfFile, readableByteChannel, bytesWrittenConsumer);

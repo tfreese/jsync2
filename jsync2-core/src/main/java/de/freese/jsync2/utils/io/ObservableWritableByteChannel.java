@@ -10,14 +10,14 @@ import java.util.function.LongConsumer;
 /**
  * @author Thomas Freese
  */
-public class ObserverableWritableByteChannel implements WritableByteChannel {
+public class ObservableWritableByteChannel implements WritableByteChannel {
     private final boolean closeDelegate;
     private final WritableByteChannel delegate;
 
     private long bytesWritten;
     private LongConsumer bytesWrittenConsumer;
 
-    public ObserverableWritableByteChannel(final WritableByteChannel delegate, final boolean closeDelegate) {
+    public ObservableWritableByteChannel(final WritableByteChannel delegate, final boolean closeDelegate) {
         super();
 
         this.delegate = Objects.requireNonNull(delegate, "delegate required");
@@ -36,7 +36,7 @@ public class ObserverableWritableByteChannel implements WritableByteChannel {
         return this.delegate.isOpen();
     }
 
-    public ObserverableWritableByteChannel onBytesWritten(final LongConsumer bytesWrittenConsumer) {
+    public ObservableWritableByteChannel onBytesWritten(final LongConsumer bytesWrittenConsumer) {
         this.bytesWrittenConsumer = Objects.requireNonNull(bytesWrittenConsumer, "bytesWrittenConsumer required");
 
         return this;
