@@ -34,7 +34,7 @@ import de.freese.jsync2.utils.io.FileVisitorDelete;
 public final class JSyncUtils {
     private static final FileVisitOption[] FILEVISITOPTION_NO_SYNLINKS = {};
     private static final FileVisitOption[] FILEVISITOPTION_WITH_SYMLINKS = {FileVisitOption.FOLLOW_LINKS};
-    private static final char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    // private static final char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
     private static final HexFormat HEX_FORMAT = HexFormat.of().withUpperCase();
     private static final LinkOption[] LINKOPTION_NO_SYMLINKS = {LinkOption.NOFOLLOW_LINKS};
     private static final LinkOption[] LINKOPTION_WITH_SYMLINKS = {};
@@ -50,15 +50,14 @@ public final class JSyncUtils {
     public static String bytesToHex(final byte[] bytes) {
         return HEX_FORMAT.formatHex(bytes);
 
-        //        final StringBuilder sb = new StringBuilder(bytes.length * 2);
+        // final StringBuilder sb = new StringBuilder(bytes.length * 2);
         //
-        //        for (byte b : bytes)
-        //        {
-        //            sb.append(HEX_CHARS[(b & 0xF0) >>> 4]);
-        //            sb.append(HEX_CHARS[b & 0x0F]);
-        //        }
+        // for (byte b : bytes) {
+        //     sb.append(HEX_CHARS[(b & 0xF0) >>> 4]);
+        //     sb.append(HEX_CHARS[b & 0x0F]);
+        // }
         //
-        //        return sb.toString().toUpperCase();
+        // return sb.toString().toUpperCase();
     }
 
     /**
@@ -153,33 +152,30 @@ public final class JSyncUtils {
         return (double) value / (double) max;
 
         // Nachkommastellen
-        // return Math.round(((double) value / (double) max) * 100) / 100D;
+        // return Math.round(((double) value / (double) max) * 100D) / 100D;
     }
 
     public static byte[] hexToBytes(final CharSequence hexString) {
         return HEX_FORMAT.parseHex(hexString);
 
-        //        if ((hexString.length() % 2) == 1)
-        //        {
-        //            throw new IllegalArgumentException("Invalid hexadecimal String supplied.");
-        //        }
+        // if ((hexString.length() % 2) == 1) {
+        //     throw new IllegalArgumentException("Invalid hexadecimal String supplied.");
+        // }
         //
-        //        final byte[] bytes = new byte[hexString.length() / 2];
+        // final byte[] bytes = new byte[hexString.length() / 2];
         //
-        //        for (int i = 0; i < hexString.length(); i += 2)
-        //        {
-        //            final int firstDigit = Character.digit(hexString.charAt(i), 16);
-        //            final int secondDigit = Character.digit(hexString.charAt(i + 1), 16);
+        // for (int i = 0; i < hexString.length(); i += 2) {
+        //     final int firstDigit = Character.digit(hexString.charAt(i), 16);
+        //     final int secondDigit = Character.digit(hexString.charAt(i + 1), 16);
         //
-        //            if ((firstDigit < 0) || (secondDigit < 0))
-        //            {
-        //                throw new IllegalArgumentException("Invalid Hexadecimal Character in: " + hexString);
-        //            }
+        //     if ((firstDigit < 0) || (secondDigit < 0)) {
+        //         throw new IllegalArgumentException("Invalid Hexadecimal Character in: " + hexString);
+        //     }
         //
-        //            bytes[i / 2] = (byte) ((firstDigit << 4) + secondDigit);
-        //        }
+        //     bytes[i / 2] = (byte) ((firstDigit << 4) + secondDigit);
+        // }
         //
-        //        return bytes;
+        // return bytes;
     }
 
     public static boolean isLinux() {
@@ -238,9 +234,10 @@ public final class JSyncUtils {
                     logger.warn("Timed out while waiting for channelGroup");
                 }
 
-                channelGroup.shutdownNow(); // Cancel currently executing tasks
+                // Cancel currently executing tasks.
+                channelGroup.shutdownNow();
 
-                // Wait a while for tasks to respond to being cancelled
+                // Wait a while for tasks to respond to being cancelled.
                 if (!channelGroup.awaitTermination(5L, TimeUnit.SECONDS)) {
                     logger.error("ChannelGroup did not terminate");
                 }
@@ -251,7 +248,7 @@ public final class JSyncUtils {
                 logger.warn("Interrupted while waiting for ChannelGroup");
             }
 
-            // (Re-)Cancel if current thread also interrupted
+            // (Re-)Cancel if current thread also interrupted.
             try {
                 channelGroup.shutdownNow();
             }
@@ -259,7 +256,7 @@ public final class JSyncUtils {
                 logger.error("ChannelGroup did not terminate");
             }
 
-            // Preserve interrupt status
+            // Preserve interrupt status.
             Thread.currentThread().interrupt();
         }
     }
@@ -302,10 +299,10 @@ public final class JSyncUtils {
         catch (InterruptedException iex) {
             logger.warn("Interrupted while waiting for ExecutorService");
 
-            // (Re-)Cancel if current thread also interrupted
+            // (Re-)Cancel if current thread also interrupted.
             executorService.shutdownNow();
 
-            // Preserve interrupt status
+            // Preserve interrupt status.
             Thread.currentThread().interrupt();
         }
     }
@@ -361,23 +358,19 @@ public final class JSyncUtils {
         // double divider = 1D;
         // String unit = "";
         //
-        // if (size < 1024)
-        // {
+        // if (size < 1024) {
         // divider = 1D;
         // unit = "B";
         // }
-        // else if (size < 1_048_576)
-        // {
+        // else if (size < 1_048_576) {
         // divider = 1024D;
         // unit = "KB";
         // }
-        // else if (size < 1_073_741_824)
-        // {
+        // else if (size < 1_073_741_824) {
         // divider = 1_048_576D;
         // unit = "MB";
         // }
-        // else if (size < (1_099_511_627_776))
-        // {
+        // else if (size < (1_099_511_627_776)) {
         // divider = 1_073_741_824D;
         // unit = "GB";
         // }
@@ -389,15 +382,13 @@ public final class JSyncUtils {
         // Variante 4:
         // double value = Math.abs(size);
         //
-        // if (value < 1024D)
-        // {
+        // if (value < 1024D) {
         // return size + " B";
         // }
         //
         // CharacterIterator ci = new StringCharacterIterator("KMGTPE");
         //
-        // while (value > 1024D)
-        // {
+        // while (value > 1024D) {
         // value /= 1024;
         // ci.next();
         // }

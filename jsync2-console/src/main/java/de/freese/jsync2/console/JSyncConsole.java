@@ -54,6 +54,8 @@ public final class JSyncConsole {
         }
         catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
+
+            System.exit(-1);
         }
 
         if (!argumentParser.hasArgs()) {
