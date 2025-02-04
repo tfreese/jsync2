@@ -106,17 +106,13 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
                 Files.createDirectories(parentPath);
             }
 
-            //            if (Files.notExists(path)) {
-            //                Files.createFile(path);
-            //            }
-
             final ByteBuffer buffer = ByteBuffer.allocate(Options.BUFFER_SIZE);
 
             try (FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING,
                     StandardOpenOption.SYNC);
                  WritableByteChannel writableByteChannel = new ObservableWritableByteChannel(fileChannel, true).onBytesWritten(consumerBytesWritten)) {
 
-                //                fileChannel.transferFrom(readableByteChannel, 0, sizeOfFile);
+                // fileChannel.transferFrom(readableByteChannel, 0, sizeOfFile);
                 while (readableByteChannel.read(buffer) != -1) {
                     buffer.flip();
 
