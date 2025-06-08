@@ -26,10 +26,10 @@ public abstract class AbstractFileSystem implements FileSystem {
     }
 
     protected Generator getGenerator() {
-        return this.generator;
+        return generator;
     }
 
     protected Logger getLogger() {
-        return this.logger;
+        return logger;
     }
 }

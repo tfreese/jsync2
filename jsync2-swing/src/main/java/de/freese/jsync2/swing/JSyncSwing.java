@@ -58,8 +58,8 @@ public final class JSyncSwing {
         frame.addWindowListener(new MainFrameListener());
         frame.setLayout(new BorderLayout());
 
-        this.controller = new JSyncController();
-        this.controller.init(JSyncContext.getMessages());
+        controller = new JSyncController();
+        controller.init(JSyncContext.getMessages());
 
         final JLabel label = new JLabel("jSync Swing GUI", SwingConstants.CENTER);
         frame.add(label, BorderLayout.CENTER);

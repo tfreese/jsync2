@@ -27,27 +27,27 @@ public class DefaultSyncItem implements SyncItem {
 
     @Override
     public String getChecksum() {
-        return this.checksum;
+        return checksum;
     }
 
     @Override
     public long getLastModifiedTime() {
-        return this.lastModifiedTime;
+        return lastModifiedTime;
     }
 
     @Override
     public String getRelativePath() {
-        return this.relativePath;
+        return relativePath;
     }
 
     @Override
     public long getSize() {
-        return this.size;
+        return size;
     }
 
     @Override
     public boolean isFile() {
-        return this.isFile;
+        return isFile;
     }
 
     @Override

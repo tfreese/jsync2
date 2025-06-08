@@ -61,6 +61,6 @@ public class LoggerClientListener extends AbstractClientListener {
     }
 
     protected Logger getLogger() {
-        return this.logger;
+        return logger;
     }
 }

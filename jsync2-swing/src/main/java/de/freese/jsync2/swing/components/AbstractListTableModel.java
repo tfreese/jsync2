@@ -101,10 +101,10 @@ public abstract class AbstractListTableModel<T> extends AbstractTableModel {
     }
 
     protected List<String> getColumnNames() {
-        return this.columnNames;
+        return columnNames;
     }
 
     protected List<T> getList() {
-        return this.list;
+        return list;
     }
 }

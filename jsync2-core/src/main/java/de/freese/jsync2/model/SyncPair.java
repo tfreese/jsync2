@@ -32,7 +32,7 @@ public class SyncPair {
     }
 
     public SyncItem getReceiverItem() {
-        return this.receiverItem;
+        return receiverItem;
     }
 
     public String getRelativePath() {
@@ -40,11 +40,11 @@ public class SyncPair {
     }
 
     public SyncItem getSenderItem() {
-        return this.senderItem;
+        return senderItem;
     }
 
     public SyncStatus getStatus() {
-        return this.status;
+        return status;
     }
 
     public boolean isFile() {
@@ -68,29 +68,29 @@ public class SyncPair {
     public void validateStatus() {
         if (getSenderItem() == null && getReceiverItem() != null) {
             // Delete: only available in Target but not in Source.
-            this.status = SyncStatus.ONLY_IN_TARGET;
+            status = SyncStatus.ONLY_IN_TARGET;
         }
         else if (getSenderItem() != null && getReceiverItem() == null) {
             // Copy: only available in Source but not in Target.
-            this.status = SyncStatus.ONLY_IN_SOURCE;
+            status = SyncStatus.ONLY_IN_SOURCE;
         }
         else if (getSenderItem() != null && getReceiverItem() != null) {
             // Copy: Different Attributes
             if (getSenderItem().getLastModifiedTime() != getReceiverItem().getLastModifiedTime()) {
-                this.status = SyncStatus.DIFFERENT_LAST_MODIFIED_TIME;
+                status = SyncStatus.DIFFERENT_LAST_MODIFIED_TIME;
             }
             else if (getSenderItem().getSize() != getReceiverItem().getSize()) {
-                this.status = SyncStatus.DIFFERENT_SIZE;
+                status = SyncStatus.DIFFERENT_SIZE;
             }
             else if (!Objects.equals(getSenderItem().getChecksum(), getReceiverItem().getChecksum())) {
-                this.status = SyncStatus.DIFFERENT_CHECKSUM;
+                status = SyncStatus.DIFFERENT_CHECKSUM;
             }
             else {
-                this.status = SyncStatus.SYNCHRONIZED;
+                status = SyncStatus.SYNCHRONIZED;
             }
         }
         else {
-            this.status = SyncStatus.UNKNOWN;
+            status = SyncStatus.UNKNOWN;
         }
     }
 }

@@ -16,7 +16,7 @@ public abstract class AbstractView implements View {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     protected Logger getLogger() {
-        return this.logger;
+        return logger;
     }
 
     protected JFrame getMainFrame() {

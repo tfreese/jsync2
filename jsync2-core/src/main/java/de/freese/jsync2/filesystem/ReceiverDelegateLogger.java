@@ -38,56 +38,56 @@ public class ReceiverDelegateLogger implements Receiver {
     public void connect(final URI uri) {
         getLogger().info("connect to {}", uri);
 
-        this.delegate.connect(uri);
+        delegate.connect(uri);
     }
 
     @Override
     public void createDirectory(final String baseDir, final String relativePath) {
         getLogger().info("create: {}/{}", baseDir, relativePath);
 
-        this.delegate.createDirectory(baseDir, relativePath);
+        delegate.createDirectory(baseDir, relativePath);
     }
 
     @Override
     public void delete(final String baseDir, final String relativePath, final boolean followSymLinks) {
         getLogger().info("delete: {}/{}", baseDir, relativePath);
 
-        this.delegate.delete(baseDir, relativePath, followSymLinks);
+        delegate.delete(baseDir, relativePath, followSymLinks);
     }
 
     @Override
     public void disconnect() {
         getLogger().info("disconnect");
 
-        this.delegate.disconnect();
+        delegate.disconnect();
     }
 
     @Override
     public String generateChecksum(final String baseDir, final String relativeFile, final LongConsumer consumerChecksumBytesRead) {
         getLogger().info("create checksum: {}/{}", baseDir, relativeFile);
 
-        return this.delegate.generateChecksum(baseDir, relativeFile, consumerChecksumBytesRead);
+        return delegate.generateChecksum(baseDir, relativeFile, consumerChecksumBytesRead);
     }
 
     @Override
     public void generateSyncItems(final String baseDir, final boolean followSymLinks, final PathFilter pathFilter, final Consumer<SyncItem> consumer) {
         getLogger().info("generate SyncItems: {}, followSymLinks={}", baseDir, followSymLinks);
 
-        this.delegate.generateSyncItems(baseDir, followSymLinks, pathFilter, consumer);
+        delegate.generateSyncItems(baseDir, followSymLinks, pathFilter, consumer);
     }
 
     @Override
     public void update(final String baseDir, final SyncItem syncItem) {
         getLogger().info("update: {}/{}", baseDir, syncItem.getRelativePath());
 
-        this.delegate.update(baseDir, syncItem);
+        delegate.update(baseDir, syncItem);
     }
 
     @Override
     public void validateFile(final String baseDir, final SyncItem syncItem, final boolean withChecksum, final LongConsumer consumerChecksumBytesRead) {
         getLogger().info("validate file: {}/{}, withChecksum={}", baseDir, syncItem.getRelativePath(), withChecksum);
 
-        this.delegate.validateFile(baseDir, syncItem, withChecksum, consumerChecksumBytesRead);
+        delegate.validateFile(baseDir, syncItem, withChecksum, consumerChecksumBytesRead);
     }
 
     @Override
@@ -95,10 +95,10 @@ public class ReceiverDelegateLogger implements Receiver {
                           final LongConsumer consumerBytesRead) {
         getLogger().info("write file: {}/{}, sizeOfFile={}", baseDir, relativeFile, sizeOfFile);
 
-        this.delegate.writeFile(baseDir, relativeFile, sizeOfFile, readableByteChannel, consumerBytesRead);
+        delegate.writeFile(baseDir, relativeFile, sizeOfFile, readableByteChannel, consumerBytesRead);
     }
 
     protected Logger getLogger() {
-        return this.logger;
+        return logger;
     }
 }

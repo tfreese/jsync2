@@ -52,8 +52,8 @@ public class DefaultSyncView extends AbstractView implements SyncView {
         // getComboBoxProtocol(EFileSystem.SENDER).setSelectedItem(JSyncProtocol.valueOf(properties.getProperty("sender.protocol", "FILE")));
         // getComboBoxProtocol(EFileSystem.RECEIVER).setSelectedItem(JSyncProtocol.valueOf(properties.getProperty("receiver.protocol", "FILE")));
         //
-        // this.textAreaFilterDirs.setText(properties.getProperty("filter.directories", "target; build; .settings; .idea; .gradle"));
-        // this.textAreaFilterFiles.setText(properties.getProperty("filter.files", ".class; .log"));
+        // textAreaFilterDirs.setText(properties.getProperty("filter.directories", "target; build; .settings; .idea; .gradle"));
+        // textAreaFilterFiles.setText(properties.getProperty("filter.files", ".class; .log"));
     }
 
     @Override
@@ -62,8 +62,8 @@ public class DefaultSyncView extends AbstractView implements SyncView {
 
         final Properties properties = new Properties();
 
-        // properties.setProperty("filter.directories", this.textAreaFilterDirs.getText());
-        // properties.setProperty("filter.files", this.textAreaFilterFiles.getText());
+        // properties.setProperty("filter.directories", textAreaFilterDirs.getText());
+        // properties.setProperty("filter.files", textAreaFilterFiles.getText());
 
         try (OutputStream os = Files.newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
             properties.store(os, null);

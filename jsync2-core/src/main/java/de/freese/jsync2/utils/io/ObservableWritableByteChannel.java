@@ -26,14 +26,14 @@ public class ObservableWritableByteChannel implements WritableByteChannel {
 
     @Override
     public void close() throws IOException {
-        if (this.closeDelegate) {
-            this.delegate.close();
+        if (closeDelegate) {
+            delegate.close();
         }
     }
 
     @Override
     public boolean isOpen() {
-        return this.delegate.isOpen();
+        return delegate.isOpen();
     }
 
     public ObservableWritableByteChannel onBytesWritten(final LongConsumer bytesWrittenConsumer) {
@@ -44,13 +44,13 @@ public class ObservableWritableByteChannel implements WritableByteChannel {
 
     @Override
     public int write(final ByteBuffer src) throws IOException {
-        final int writeCount = this.delegate.write(src);
+        final int writeCount = delegate.write(src);
 
         if (writeCount > 0) {
-            this.bytesWritten += writeCount;
+            bytesWritten += writeCount;
 
             if (bytesWrittenConsumer != null) {
-                this.bytesWrittenConsumer.accept(this.bytesWritten);
+                bytesWrittenConsumer.accept(bytesWritten);
             }
         }
 
