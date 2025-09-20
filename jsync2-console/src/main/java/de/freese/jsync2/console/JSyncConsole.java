@@ -22,7 +22,38 @@ import de.freese.jsync2.filter.PathFilterEndsWith;
 public final class JSyncConsole {
     public static final Logger LOGGER = LoggerFactory.getLogger(JSyncConsole.class);
 
-    public static void main(final String[] args) throws Exception {
+    public static void run(final ArgumentParser argumentParser) throws Exception {
+        final Options options = new Options.Builder()
+                .delete(argumentParser.delete())
+                .followSymLinks(argumentParser.followSymlinks())
+                .dryRun(argumentParser.dryRun())
+                .checksum(argumentParser.checksum())
+                .build();
+
+        final URI senderUri = new URI(argumentParser.sender());
+        final URI receiverUri = new URI(argumentParser.receiver());
+
+        System.out.println("Start synchronisation");
+        syncDirectories(options, senderUri, receiverUri, new ConsoleClientListener());
+        System.out.println("Synchronisation finished");
+    }
+
+    // private static void disableLogging() {
+    // // ch.qos.logback.classic.Logger Logger rootLogger = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+    // // rootLogger.setLevel(Level.OFF);
+    // //
+    // // LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+    // // Logger rootLogger = loggerContext.getLogger(Logger.ROOT_LOGGER_NAME);
+    // // rootLogger.setLevel(Level.INFO);
+    // }
+
+    public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) {
+        final PathFilter pathFilter = new PathFilterEndsWith(Set.of("target", "build", ".settings", ".idea", ".gradle"), Set.of(".class", ".log"));
+
+        JSync.syncDirectories(options, senderUri, receiverUri, clientListener, pathFilter);
+    }
+
+    static void main(final String[] args) throws Exception {
         String[] arguments = args;
 
         if (arguments.length == 0) {
@@ -65,37 +96,6 @@ public final class JSyncConsole {
         }
 
         run(argumentParser);
-    }
-
-    // private static void disableLogging() {
-    // // ch.qos.logback.classic.Logger Logger rootLogger = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-    // // rootLogger.setLevel(Level.OFF);
-    // //
-    // // LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-    // // Logger rootLogger = loggerContext.getLogger(Logger.ROOT_LOGGER_NAME);
-    // // rootLogger.setLevel(Level.INFO);
-    // }
-
-    public static void run(final ArgumentParser argumentParser) throws Exception {
-        final Options options = new Options.Builder()
-                .delete(argumentParser.delete())
-                .followSymLinks(argumentParser.followSymlinks())
-                .dryRun(argumentParser.dryRun())
-                .checksum(argumentParser.checksum())
-                .build();
-
-        final URI senderUri = new URI(argumentParser.sender());
-        final URI receiverUri = new URI(argumentParser.receiver());
-
-        System.out.println("Start synchronisation");
-        syncDirectories(options, senderUri, receiverUri, new ConsoleClientListener());
-        System.out.println("Synchronisation finished");
-    }
-
-    public static void syncDirectories(final Options options, final URI senderUri, final URI receiverUri, final ClientListener clientListener) {
-        final PathFilter pathFilter = new PathFilterEndsWith(Set.of("target", "build", ".settings", ".idea", ".gradle"), Set.of(".class", ".log"));
-
-        JSync.syncDirectories(options, senderUri, receiverUri, clientListener, pathFilter);
     }
 
     private JSyncConsole() {

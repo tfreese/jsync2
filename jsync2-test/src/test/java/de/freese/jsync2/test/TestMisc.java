@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 class TestMisc {
     // private static final Logger LOGGER = LoggerFactory.getLogger(TestMisc.class);
 
-    public static void main(final String[] args) {
+    static void main() {
         new TestMisc().testPrintSameLine();
     }
 
