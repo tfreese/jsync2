@@ -8,9 +8,9 @@ pluginManagement {
 }
 
 // Without rootProject.name the Name of the Projekt-Directory is used.
-//rootProject.name = "jsync2"
+// rootProject.name = "jsync2"
 
-include "jsync2-core"
-include "jsync2-console"
-include "jsync2-swing"
-include "jsync2-test"
+include("jsync2-core")
+include("jsync2-console")
+include("jsync2-swing")
+include("jsync2-test")
