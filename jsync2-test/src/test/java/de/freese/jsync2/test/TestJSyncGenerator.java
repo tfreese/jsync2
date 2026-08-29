@@ -1,14 +1,9 @@
-// Created: 22.10.2016
 package de.freese.jsync2.test;
 
-import de.freese.jsync2.filter.PathFilter;
-import de.freese.jsync2.filter.PathFilterEndsWith;
-import de.freese.jsync2.filter.PathFilterNoOp;
-import de.freese.jsync2.generator.DefaultGenerator;
-import de.freese.jsync2.model.SyncItem;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,13 +13,19 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import de.freese.jsync2.filter.PathFilter;
+import de.freese.jsync2.filter.PathFilterEndsWith;
+import de.freese.jsync2.filter.PathFilterNoOp;
+import de.freese.jsync2.generator.DefaultGenerator;
+import de.freese.jsync2.model.SyncItem;
 
 /**
  * @author Thomas Freese
+ * @since 22.10.2016
  */
 class TestJSyncGenerator extends AbstractJSyncIoTest {
     private static final Path PATH_DEST = createDestPath(TestJSyncGenerator.class);

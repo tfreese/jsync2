@@ -1,4 +1,3 @@
-// Created: 13.11.2018
 package de.freese.jsync2.utils;
 
 import java.io.Closeable;
@@ -30,6 +29,7 @@ import de.freese.jsync2.utils.io.FileVisitorDelete;
 
 /**
  * @author Thomas Freese
+ * @since 13.11.2018
  */
 public final class JSyncUtils {
     private static final FileVisitOption[] FILEVISITOPTION_NO_SYNLINKS = {};
@@ -66,13 +66,13 @@ public final class JSyncUtils {
     public static void close(final Channel channel) {
         if (channel != null && channel.isOpen()) {
             try {
-                if (channel instanceof FileChannel fc) {
+                if (channel instanceof final FileChannel fc) {
                     fc.force(false);
                 }
 
                 channel.close();
             }
-            catch (IOException ex) {
+            catch (final IOException ex) {
                 throw new UncheckedIOException(ex);
             }
         }
@@ -278,8 +278,8 @@ public final class JSyncUtils {
                 logger.warn("Timed out while waiting for ExecutorService");
 
                 // Cancel currently executing tasks.
-                for (Runnable remainingTask : executorService.shutdownNow()) {
-                    if (remainingTask instanceof Future<?> f) {
+                for (final Runnable remainingTask : executorService.shutdownNow()) {
+                    if (remainingTask instanceof final Future<?> f) {
                         f.cancel(true);
                     }
                 }

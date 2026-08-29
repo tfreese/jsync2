@@ -24,11 +24,11 @@ public abstract class AbstractListTableModel<T> extends AbstractTableModel {
     }
 
     protected AbstractListTableModel(final List<String> columnNames, final List<T> list) {
-        super();
-
         if (columnNames.isEmpty()) {
             throw new IllegalArgumentException("columnNames are empty");
         }
+
+        super();
 
         this.columnNames = Objects.requireNonNull(columnNames, "columnNames required");
         this.list = Objects.requireNonNull(list, "list required");

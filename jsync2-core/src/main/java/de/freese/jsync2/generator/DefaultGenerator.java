@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.generator;
 
 import java.io.IOException;
@@ -24,6 +23,7 @@ import de.freese.jsync2.utils.io.FileVisitorHierarchie;
 
 /**
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public class DefaultGenerator implements Generator {
 
@@ -57,7 +57,7 @@ public class DefaultGenerator implements Generator {
         try {
             Files.walkFileTree(basePath, Set.of(visitOptions), Integer.MAX_VALUE, new FileVisitorHierarchie(basePath, pathFilter, pathConsumer));
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }
@@ -85,7 +85,7 @@ public class DefaultGenerator implements Generator {
             final long lastModifiedTime = Files.getLastModifiedTime(directory, linkOptions).to(TimeUnit.SECONDS);
             syncItem.setLastModifiedTime(lastModifiedTime);
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
 
@@ -103,7 +103,7 @@ public class DefaultGenerator implements Generator {
             syncItem.setLastModifiedTime(basicFileAttributes.lastModifiedTime().to(TimeUnit.SECONDS));
             syncItem.setSize(basicFileAttributes.size());
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
 

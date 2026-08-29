@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.client;
 
 import java.net.URI;
@@ -18,6 +17,7 @@ import de.freese.jsync2.model.SyncStatus;
 
 /**
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public class DefaultClient extends AbstractClient {
     public DefaultClient(final Options options, final URI senderUri, final URI receiverUri) {

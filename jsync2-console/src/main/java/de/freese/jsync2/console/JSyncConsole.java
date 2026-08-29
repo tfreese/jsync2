@@ -1,4 +1,3 @@
-// Created: 23.10.2016
 package de.freese.jsync2.console;
 
 import java.net.URI;
@@ -18,6 +17,7 @@ import de.freese.jsync2.filter.PathFilterEndsWith;
 
 /**
  * @author Thomas Freese
+ * @since 23.10.2016
  */
 public final class JSyncConsole {
     public static final Logger LOGGER = LoggerFactory.getLogger(JSyncConsole.class);
@@ -83,7 +83,7 @@ public final class JSyncConsole {
             argumentParser = new ArgumentParserApacheCommonsCli(arguments);
             // argumentParser = new ArgumentParserJopt(arguments);
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
 
             System.exit(-1);

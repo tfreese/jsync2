@@ -1,4 +1,3 @@
-// Created: 16.04.23
 package de.freese.jsync2;
 
 import java.net.URI;
@@ -16,6 +15,7 @@ import de.freese.jsync2.model.SyncPair;
 
 /**
  * @author Thomas Freese
+ * @since 16.04.2023
  */
 public final class JSync {
 

@@ -1,4 +1,3 @@
-// Created: 26.07.2020
 package de.freese.jsync2.client.listener;
 
 import de.freese.jsync2.Options;
@@ -6,6 +5,7 @@ import de.freese.jsync2.model.SyncItem;
 
 /**
  * @author Thomas Freese
+ * @since 26.07.2020
  */
 public class EmptyClientListener implements ClientListener {
     @Override

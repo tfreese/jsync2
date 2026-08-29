@@ -1,4 +1,3 @@
-// Created: 31.07.2021
 package de.freese.jsync2.swing;
 
 import java.util.Arrays;
@@ -9,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * @author Thomas Freese
+ * @since 31.07.2021
  */
 public final class JSyncSwingLauncher {
     static void main(final String[] args) {
@@ -46,7 +46,7 @@ public final class JSyncSwingLauncher {
                     JSyncContext.setMainFrame(frame);
                 });
             }
-            catch (Exception ex) {
+            catch (final Exception ex) {
                 throw new RuntimeException(ex);
             }
         });

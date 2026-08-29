@@ -1,4 +1,3 @@
-// Created: 26.10.2016
 package de.freese.jsync2.utils.io;
 
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.util.function.LongConsumer;
 
 /**
  * @author Thomas Freese
+ * @since 26.10.2016
  */
 public class ObservableWritableByteChannel implements WritableByteChannel {
     private final boolean closeDelegate;

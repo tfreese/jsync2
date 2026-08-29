@@ -1,4 +1,3 @@
-// Created: 28.07.2021
 package de.freese.jsync2.utils.io;
 
 import java.io.IOException;
@@ -16,6 +15,7 @@ import de.freese.jsync2.filter.PathFilter;
 
 /**
  * @author Thomas Freese
+ * @since 28.07.2021
  */
 public class FileVisitorHierarchie implements FileVisitor<Path> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileVisitorHierarchie.class);

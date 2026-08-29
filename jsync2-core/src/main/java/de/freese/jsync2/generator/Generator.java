@@ -1,4 +1,3 @@
-// Created: 22.10.2016
 package de.freese.jsync2.generator;
 
 import java.nio.file.Path;
@@ -12,6 +11,7 @@ import de.freese.jsync2.model.SyncItem;
  * The Generator collects all relevant Information of the FileSystem for the chosen {@link Path}.
  *
  * @author Thomas Freese
+ * @since 22.10.2016
  */
 public interface Generator {
     /**

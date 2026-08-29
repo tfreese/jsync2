@@ -1,4 +1,3 @@
-// Created: 25.11.2018
 package de.freese.jsync2.swing;
 
 import java.awt.BorderLayout;
@@ -24,6 +23,7 @@ import de.freese.jsync2.swing.controller.JSyncController;
 
 /**
  * @author Thomas Freese
+ * @since 25.11.2018
  */
 public final class JSyncSwing {
     private static final Logger LOGGER = LoggerFactory.getLogger(JSyncSwing.class);
@@ -63,7 +63,7 @@ public final class JSyncSwing {
 
         final JLabel label = new JLabel("jSync Swing GUI", SwingConstants.CENTER);
         frame.add(label, BorderLayout.CENTER);
-        //        frame.add(syncView.getComponent(), BorderLayout.CENTER);
+        // frame.add(syncView.getComponent(), BorderLayout.CENTER);
 
         consumer.accept(frame);
     }
@@ -98,8 +98,7 @@ public final class JSyncSwing {
 
             // String keyString = key.toString();
             //
-            // if (keyString.endsWith(".font") || keyString.endsWith(".acceleratorFont"))
-            // {
+            // if (keyString.endsWith(".font") || keyString.endsWith(".acceleratorFont")) {
             // UIManager.put(key, new FontUIResource(font));
             // }
         });
@@ -109,11 +108,9 @@ public final class JSyncSwing {
 
         // UIDefaults defaults = UIManager.getLookAndFeelDefaults();
         //
-        // SortedSet<Object> uiKeys = new TreeSet<>(new Comparator<Object>()
-        // {
+        // SortedSet<Object> uiKeys = new TreeSet<>(new Comparator<Object>() {
         // @Override
-        // public int compare(final Object o1, final Object o2)
-        // {
+        // public int compare(final Object o1, final Object o2) {
         // return o1.toString().compareTo(o2.toString());
         // }
         //
@@ -122,8 +119,7 @@ public final class JSyncSwing {
         //
         // String format = "%1$s \t %2$s %n";
         //
-        // for (Object key : uiKeys)
-        // {
+        // for (Object key : uiKeys) {
         // Object value = defaults.get(key);
         //
         // System.out.printf(format, key.toString(), (value != null) ? value.toString() : "NULL");

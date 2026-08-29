@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.filesystem.local;
 
 import java.net.URI;
@@ -14,6 +13,7 @@ import de.freese.jsync2.model.SyncItem;
  * Base-Implementation of a {@link FileSystem} for Localhost-Filesystems.
  *
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public abstract class AbstractLocalFileSystem extends AbstractFileSystem {
 

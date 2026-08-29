@@ -1,4 +1,3 @@
-// Created: 28.04.2020
 package de.freese.jsync2.filesystem;
 
 import java.net.URI;
@@ -10,6 +9,7 @@ import de.freese.jsync2.model.SyncItem;
 
 /**
  * @author Thomas Freese
+ * @since 28.04.2020
  */
 public interface FileSystem {
     void connect(URI uri);

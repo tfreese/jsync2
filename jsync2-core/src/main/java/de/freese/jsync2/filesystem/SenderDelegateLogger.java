@@ -1,4 +1,3 @@
-// Created: 07.08.2021
 package de.freese.jsync2.filesystem;
 
 import java.net.URI;
@@ -15,6 +14,7 @@ import de.freese.jsync2.model.SyncItem;
 
 /**
  * @author Thomas Freese
+ * @since 07.08.2021
  */
 public class SenderDelegateLogger implements Sender {
     private final Sender delegate;
@@ -26,7 +26,7 @@ public class SenderDelegateLogger implements Sender {
 
         this.delegate = Objects.requireNonNull(delegate, "delegate required");
 
-        if (this.delegate instanceof AbstractFileSystem fs) {
+        if (this.delegate instanceof final AbstractFileSystem fs) {
             this.logger = fs.getLogger();
         }
         else {

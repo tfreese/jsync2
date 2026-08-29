@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.client;
 
 import java.util.List;
@@ -17,6 +16,7 @@ import de.freese.jsync2.model.SyncPair;
  * Coordinates {@link Sender} and {@link Receiver}.
  *
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public interface Client {
     void connectFileSystems();

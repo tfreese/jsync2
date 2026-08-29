@@ -1,4 +1,3 @@
-// Created: 06.08.2021
 package de.freese.jsync2.swing;
 
 import java.util.concurrent.ExecutorService;
@@ -9,6 +8,7 @@ import de.freese.jsync2.utils.JSyncUtils;
 
 /**
  * @author Thomas Freese
+ * @since 06.08.2021
  */
 public final class JSyncContext {
     private static ExecutorService executorService;

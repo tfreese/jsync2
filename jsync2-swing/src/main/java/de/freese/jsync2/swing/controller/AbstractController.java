@@ -1,4 +1,3 @@
-// Created: 15.04.23
 package de.freese.jsync2.swing.controller;
 
 import java.awt.Component;
@@ -11,6 +10,7 @@ import de.freese.jsync2.swing.view.View;
 
 /**
  * @author Thomas Freese
+ * @since 15.04.2023
  */
 public abstract class AbstractController implements Controller {
     private final Logger logger = LoggerFactory.getLogger(getClass());

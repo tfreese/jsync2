@@ -1,4 +1,3 @@
-// Created: 22.10.2016
 package de.freese.jsync2.model;
 
 import java.util.Objects;
@@ -7,6 +6,7 @@ import java.util.Objects;
  * Object for Informationen about Source- and Target-Destination.<br>
  *
  * @author Thomas Freese
+ * @since 22.10.2016
  */
 public class SyncPair {
     private final SyncItem receiverItem;
@@ -21,14 +21,14 @@ public class SyncPair {
      * @param receiverItem {@link SyncItem}; if null only existing in Sender
      */
     public SyncPair(final SyncItem senderItem, final SyncItem receiverItem) {
+        if (senderItem == null && receiverItem == null) {
+            throw new IllegalArgumentException("only one SyncItem can be null");
+        }
+
         super();
 
         this.senderItem = senderItem;
         this.receiverItem = receiverItem;
-
-        if (senderItem == null && receiverItem == null) {
-            throw new IllegalArgumentException("only one SyncItem can be null");
-        }
     }
 
     public SyncItem getReceiverItem() {
@@ -53,13 +53,10 @@ public class SyncPair {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("SyncPair [");
-        builder.append("relativePath=").append(getRelativePath());
-        builder.append(", status=").append(getStatus());
-        builder.append("]");
-
-        return builder.toString();
+        return "SyncPair ["
+                + "relativePath=" + getRelativePath()
+                + ", status=" + getStatus()
+                + "]";
     }
 
     /**

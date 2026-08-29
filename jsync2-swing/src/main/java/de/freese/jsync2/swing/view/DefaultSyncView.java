@@ -1,4 +1,3 @@
-// Created: 15.04.23
 package de.freese.jsync2.swing.view;
 
 import java.awt.Component;
@@ -16,6 +15,7 @@ import de.freese.jsync2.swing.controller.Controller;
 
 /**
  * @author Thomas Freese
+ * @since 15.04.2023
  */
 public class DefaultSyncView extends AbstractView implements SyncView {
     @Override
@@ -38,7 +38,7 @@ public class DefaultSyncView extends AbstractView implements SyncView {
             try (InputStream is = Files.newInputStream(path, StandardOpenOption.READ)) {
                 properties.load(is);
             }
-            catch (Exception ex) {
+            catch (final Exception ex) {
                 getLogger().error(ex.getMessage(), ex);
             }
         }
@@ -68,7 +68,7 @@ public class DefaultSyncView extends AbstractView implements SyncView {
         try (OutputStream os = Files.newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING)) {
             properties.store(os, null);
         }
-        catch (Exception ex) {
+        catch (final Exception ex) {
             getLogger().error(ex.getMessage(), ex);
         }
     }

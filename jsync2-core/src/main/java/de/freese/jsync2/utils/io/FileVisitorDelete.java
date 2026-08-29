@@ -1,4 +1,3 @@
-// Created: 28.07.2021
 package de.freese.jsync2.utils.io;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Thomas Freese
+ * @since 28.07.2021
  */
 public class FileVisitorDelete extends SimpleFileVisitor<Path> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileVisitorDelete.class);

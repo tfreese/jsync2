@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.filesystem.local;
 
 import java.io.IOException;
@@ -16,6 +15,7 @@ import de.freese.jsync2.filesystem.Sender;
  * {@link Sender} for Localhost-Filesystems.
  *
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public class LocalhostSender extends AbstractLocalFileSystem implements Sender {
     @Override
@@ -32,7 +32,7 @@ public class LocalhostSender extends AbstractLocalFileSystem implements Sender {
         try {
             return FileChannel.open(path, StandardOpenOption.READ);
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }

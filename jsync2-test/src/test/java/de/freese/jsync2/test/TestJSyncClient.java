@@ -1,4 +1,3 @@
-// Created: 18.07.2021
 package de.freese.jsync2.test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -20,6 +19,7 @@ import de.freese.jsync2.filter.PathFilterNoOp;
 
 /**
  * @author Thomas Freese
+ * @since 18.07.2021
  */
 class TestJSyncClient extends AbstractJSyncIoTest {
     private static final Path PATH_DEST = createDestPath(TestJSyncClient.class);

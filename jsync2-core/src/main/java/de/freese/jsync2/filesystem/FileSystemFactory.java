@@ -1,4 +1,3 @@
-// Created: 21.07.2021
 package de.freese.jsync2.filesystem;
 
 import java.net.URI;
@@ -14,6 +13,7 @@ import de.freese.jsync2.model.JSyncProtocol;
 
 /**
  * @author Thomas Freese
+ * @since 21.07.2021
  */
 public final class FileSystemFactory {
     /**
@@ -44,7 +44,7 @@ public final class FileSystemFactory {
 
         final String scheme = uri.getScheme();
 
-        for (FileSystemProvider provider : serviceLoader) {
+        for (final FileSystemProvider provider : serviceLoader) {
             if (provider.supportsProtocol(scheme)) {
                 return new ReceiverDelegateLogger(provider.createReceiver(uri));
             }
@@ -58,7 +58,7 @@ public final class FileSystemFactory {
 
         final String scheme = uri.getScheme();
 
-        for (FileSystemProvider provider : serviceLoader) {
+        for (final FileSystemProvider provider : serviceLoader) {
             if (provider.supportsProtocol(scheme)) {
                 return new SenderDelegateLogger(provider.createSender(uri));
             }
@@ -72,8 +72,8 @@ public final class FileSystemFactory {
 
         final Set<JSyncProtocol> availableProtocols = new HashSet<>();
 
-        for (FileSystemProvider provider : serviceLoader) {
-            for (JSyncProtocol protocol : protocols) {
+        for (final FileSystemProvider provider : serviceLoader) {
+            for (final JSyncProtocol protocol : protocols) {
                 if (provider.supportsProtocol(protocol.getScheme())) {
                     availableProtocols.add(protocol);
                 }

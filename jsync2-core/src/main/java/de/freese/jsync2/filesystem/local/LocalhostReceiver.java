@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.filesystem.local;
 
 import java.io.IOException;
@@ -26,6 +25,7 @@ import de.freese.jsync2.utils.io.ObservableWritableByteChannel;
  * {@link Receiver} for Localhost-Filesystems.
  *
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiver {
     @Override
@@ -37,7 +37,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
                 Files.createDirectories(path);
             }
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }
@@ -49,7 +49,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
         try {
             JSyncUtils.delete(path, followSymLinks);
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }
@@ -64,7 +64,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
         try {
             Files.setLastModifiedTime(path, FileTime.from(lastModifiedTime, TimeUnit.SECONDS));
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }
@@ -90,7 +90,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
                 }
             }
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }
@@ -126,7 +126,7 @@ public class LocalhostReceiver extends AbstractLocalFileSystem implements Receiv
                 fileChannel.force(false);
             }
         }
-        catch (IOException ex) {
+        catch (final IOException ex) {
             throw new UncheckedIOException(ex);
         }
     }

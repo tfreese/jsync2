@@ -1,4 +1,3 @@
-// Created: 16.04.23
 package de.freese.jsync2.test;
 
 import static org.awaitility.Awaitility.await;
@@ -7,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Thomas Freese
+ * @since 16.04.2023
  */
 class TestMisc {
     // private static final Logger LOGGER = LoggerFactory.getLogger(TestMisc.class);

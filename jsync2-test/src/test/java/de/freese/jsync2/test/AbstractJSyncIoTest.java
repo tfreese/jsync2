@@ -1,4 +1,3 @@
-// Created: 06.04.2018
 package de.freese.jsync2.test;
 
 import java.io.FileOutputStream;
@@ -13,6 +12,7 @@ import de.freese.jsync2.utils.JSyncUtils;
 
 /**
  * @author Thomas Freese
+ * @since 06.04.2018
  */
 abstract class AbstractJSyncIoTest {
 

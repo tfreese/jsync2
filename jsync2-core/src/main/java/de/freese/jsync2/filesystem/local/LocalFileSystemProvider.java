@@ -1,4 +1,3 @@
-// Created: 21.07.2021
 package de.freese.jsync2.filesystem.local;
 
 import java.net.URI;
@@ -10,6 +9,7 @@ import de.freese.jsync2.model.JSyncProtocol;
 
 /**
  * @author Thomas Freese
+ * @since 21.07.2021
  */
 public class LocalFileSystemProvider implements FileSystemProvider {
     @Override

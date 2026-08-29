@@ -1,4 +1,3 @@
-// Created: 11.01.2017
 package de.freese.jsync2.utils.io;
 
 import java.io.IOException;
@@ -9,6 +8,7 @@ import java.util.function.LongConsumer;
 
 /**
  * @author Thomas Freese
+ * @since 11.01.2017
  */
 public class ObservableReadableByteChannel implements ReadableByteChannel {
     private final boolean closeDelegate;

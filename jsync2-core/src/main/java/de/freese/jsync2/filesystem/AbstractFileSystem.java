@@ -1,4 +1,3 @@
-// Created: 05.04.2018
 package de.freese.jsync2.filesystem;
 
 import java.nio.charset.Charset;
@@ -14,6 +13,7 @@ import de.freese.jsync2.generator.Generator;
  * Base-Implementation of a {@link FileSystem}.
  *
  * @author Thomas Freese
+ * @since 05.04.2018
  */
 public abstract class AbstractFileSystem implements FileSystem {
 

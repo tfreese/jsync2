@@ -1,4 +1,3 @@
-// Created: 17.11.2018
 package de.freese.jsync2.utils;
 
 import java.io.IOException;
@@ -17,6 +16,7 @@ import de.freese.jsync2.Options;
 
 /**
  * @author Thomas Freese
+ * @since 17.11.2018
  */
 public final class DigestUtils {
     /**
@@ -76,7 +76,7 @@ public final class DigestUtils {
 
             return JSyncUtils.bytesToHex(bytes);
         }
-        catch (IOException iex) {
+        catch (final IOException iex) {
             throw new UncheckedIOException(iex);
         }
     }
